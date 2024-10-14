@@ -1,6 +1,6 @@
 from akeneo.akeneo import Akeneo
 
-class ContentdeskOpenData:
+class Extraction:
     def __init__(self, host, clientid, secret, user, passwd):
         self.host = host
         self.clientid = clientid
@@ -16,4 +16,16 @@ class ContentdeskOpenData:
         return products
     
     def createMd(self):
-        pass
+        file = open("products.md", "w")
+        for product in self.products:
+            file.write("## " + product["identifier"] + "\n")
+            file.write("### Description\n")
+            file.write(product["description"]["en_US"] + "\n")
+            file.write("### Categories\n")
+            for category in product["categories"]:
+                file.write(category + "\n")
+            file.write("### Attributes\n")
+            for attribute in product["values"]:
+                file.write(attribute + ": " + product["values"][attribute]["en_US"] + "\n")
+            file.write("\n")
+        return file
