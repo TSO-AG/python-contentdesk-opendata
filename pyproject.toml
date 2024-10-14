@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contentdesk-opendata"
+version = "0.0.1"
+authors = [
+  { name="Thomas Solenthaler" },
+]
+description = "A small package for Contentdesk OpenData Portal"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/tsolenthaler/python-contentdesk-opendata"
+"Bug Tracker" = "https://github.com/tsolenthaler/python-contentdesk-opendata/issues"
