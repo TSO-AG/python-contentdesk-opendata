@@ -12,7 +12,7 @@ py -m twine upload --repository testpypi dist/*
 
 ## Test Package Install
 
-https://test.pypi.org/project/akeneo/0.0.2/
+https://test.pypi.org/project/contentdesk-opendata/0.0.1/
 
 ### Install Version
-pip install -i https://test.pypi.org/simple/ akeneo==0.0.6
+pip install -i https://test.pypi.org/simple/ contentdesk-opendata/==0.0.1
