@@ -9,7 +9,7 @@ class ContentdeskOpenData:
 
     def __init__(self, target):
         self.target = target
-        self.extractProducts = extract.Extraction(self.target)
+        self.extractProducts = extract.Extraction(self.target['host'], self.target['clientid'], self.target['secret'], self.target['user'], self.target['passwd'])
         self.debugExtractProducts()
         self.transformProducts = transform.Transform(self.extractProducts)
         self.debugTransformProducts()
