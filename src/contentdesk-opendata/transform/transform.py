@@ -1,5 +1,6 @@
 import json
 class Transform:
+    
     def createJSONLD(self):
         jsonLD = []
         for product in self.produccts:

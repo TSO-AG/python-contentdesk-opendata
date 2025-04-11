@@ -7,14 +7,18 @@ class Extraction:
         self.secret = secret
         self.user = user
         self.passwd = passwd
-        self.produccts = self.getProducts(self)
+        self.produccts = self.getProductsfromTarget(self)
         
-    def getProducts(self):
+    def getProductsfromTarget(self):
         target = Akeneo(self.host, self.clientid, self.secret, self.user, self.passwd)
         search = '{"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"enabled":[{"operator":"=","value":true}],"license":[{"operator":"IN","value":["cc0","ccby","ccbync","ccbynd","ccbysa","ccbyncnd","ccbyncsa"]}]}'
         products = target.getProducts(search)
         return products
     
+    def getProducts(self):
+        return self.produccts
+    
+    ## Move to transform or Load
     def createMd(self):
         file = open("products.md", "w")
         for product in self.products:
