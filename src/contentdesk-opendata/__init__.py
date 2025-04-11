@@ -12,7 +12,6 @@ class ContentdeskOpenData:
         self.extractProducts = extract.Extraction(self.target)
         self.transformProducts = transform.Transform(self.extractProducts)
     
-    
     def getExtractProducts(self):
         return self.extractProducts
         
