@@ -1,9 +1,13 @@
 import json
 class Transform:
     
-    def createJSONLD(self):
+    def __init__(self, extractProducts):
+        self.extractProducts = extractProducts
+        self.transformProducts = self.transformToJSONLD()
+    
+    def transformToJSONLD(self):
         jsonLD = []
-        for product in self.produccts:
+        for product in self.extractProducts:
             jsonLD.append({
                 "@context": "http://schema.org/",
                 "@type": product["family"],
@@ -15,7 +19,7 @@ class Transform:
                 "url": product["values"]["url"]
             })
             
-        # create json
-        
-            
-        return json.dump(jsonLD)
+        return jsonLD
+    
+    def getTransformProducts(self):
+        return self.transformProducts
