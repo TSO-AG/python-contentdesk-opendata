@@ -4,11 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "contentdeskOpendata"
-version = "0.0.8"
+version = "0.0.9"
 authors = [
   { name="Thomas Solenthaler" },
 ]
 description = "A small package for Contentdesk OpenData Portal"
+long_description = { file = "README.md" }
 readme = "README.md"
 requires-python = ">=3.11"
 classifiers = [
