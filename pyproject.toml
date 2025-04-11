@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "contentdesk-opendata"
-version = "0.0.7"
+name = "contentdeskOpendata"
+version = "0.0.8"
 authors = [
   { name="Thomas Solenthaler" },
 ]
