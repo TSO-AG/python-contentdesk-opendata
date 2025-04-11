@@ -17,6 +17,9 @@ class ContentdeskOpenData:
         self.debugLoadProducts()
     
     def getExtractProducts(self):
+        """
+        Returns the extracted products.
+        """
         return self.extractProducts
     
     def getTransformProducts(self):
