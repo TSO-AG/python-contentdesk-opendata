@@ -27,7 +27,7 @@ class Transform:
         newProduct['@context'] = "http://schema.org/"
         newProduct['@type'] = product["family"]
         newProduct['identifier'] = product["identifier"]
-        if 'category' in product['values'] and product['values']['category']:
+        if 'categories' in product and product['categories']:
             newProduct['category'] = product["categories"] # TODO: check Categories only from discover.swiss Prefix "_sui"
         newProduct['dateCreated'] = product['created']
         newProduct['dateModified'] = product['updated']
@@ -53,6 +53,8 @@ class Transform:
         # Images
         if 'image' in product['values']:
             newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
+        
+        
         # additionalProperty tbd
         return newProduct
     
