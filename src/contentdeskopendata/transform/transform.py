@@ -27,8 +27,9 @@ class Transform:
         newProduct['@context'] = "http://schema.org/"
         newProduct['@type'] = product["family"]
         newProduct['identifier'] = product["identifier"]
-        if 'categories' in product and product['categories']:
-            newProduct['category'] = product["categories"] # TODO: check Categories only from discover.swiss Prefix "_sui"
+        # TODO: check Categories only from discover.swiss Prefix "_sui"
+        if 'leisure' in product['values'] and product['values']['leisure']:
+            newProduct['category'] = product['values']['leisure'][0]['data'] 
         newProduct['dateCreated'] = product['created']
         newProduct['dateModified'] = product['updated']
         # Generel
