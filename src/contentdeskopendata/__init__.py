@@ -1,7 +1,6 @@
 from src.contentdeskopendata.extract.extract import Extraction
 from src.contentdeskopendata.transform.transform import Transform
 from src.contentdeskopendata.load.load import Load
-import src.service.debug as debug
 
 class ContentdeskOpenData:
     """
@@ -36,13 +35,13 @@ class ContentdeskOpenData:
         return self.config
     
     def debugExtractProducts(self):
-        debug.loadToDebug(self.extractProducts.getProducts(), "extractProducts")
+        Load.debugToFile(self.extractProducts.getProducts(), "extractProducts")
         print("Debug file extractProducts created")
     
     def debugTransformProducts(self):
-        debug.loadToDebug(self.transformProducts.getTransformProducts(), "transformProducts")
+        Load.debugToFile(self.transformProducts.getTransformProducts(), "transformProducts")
         print("Debug file transformProducts created")
         
     def debugLoadProducts(self):
-        debug.loadToDebug(self.loadProducts.getLoadProducts(), "loadProducts")
+        Load.debugToFile(self.loadProducts.getLoadProducts(), "loadProducts")
         print("Debug file loadProducts created")

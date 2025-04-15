@@ -5,4 +5,5 @@ tests/*
 .env
 *__pycache__*
 debug/*
-api/products.json
+api/*
+docs/*

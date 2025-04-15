@@ -34,8 +34,23 @@ class Load:
     
     def loadProductsToFile(self, products, fileName):        
         # Check if folder exists
-        if not os.path.exists("../api/"):
-            os.makedirs("../api/")
+        # TODO: Fix Folder Path by Settings
+        if not os.path.exists("../docs/api/"):
+            os.makedirs("../docs/api/")
         
-        with open("../api/"+fileName+".json", "w") as file:
+        with open("../docs/api/"+fileName+".json", "w") as file:
+            file.write(json.dumps(products))
+        
+    def debugToFile(products, fileName):
+         # get current date and time
+        current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+        #print("Current date & time : ", current_datetime)
+        
+        # convert datetime obj to string
+        str_current_datetime = str(current_datetime)
+        # Check if folder exists
+        if not os.path.exists("../debug/"+str_current_datetime):
+            os.makedirs("../debug/"+str_current_datetime+"/")
+        
+        with open("../debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
