@@ -13,8 +13,8 @@ def loadToDebug(products, fileName):
     str_current_datetime = str(current_datetime)
     
     # Check if folder exists
-    if not os.path.exists("../../docs/debug/"+str_current_datetime+"/"):
-        os.makedirs("../../docs/debug/"+str_current_datetime+"/")
+    if not os.path.exists("../debug/"+str_current_datetime+"/"):
+        os.makedirs("../debug/"+str_current_datetime+"/")
     
-    with open("../../docs/debug//"+str_current_datetime+"/"+fileName+".json", "w") as file:
+    with open("../debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
         file.write(json.dumps(products))
