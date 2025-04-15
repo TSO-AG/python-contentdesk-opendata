@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 class Load:
     
@@ -11,4 +12,30 @@ class Load:
         return self.loadProducts
     
     def setLoadProducts(self):
+        # All Products to api/products.json
+        self.loadProductsToFile(self.transformProducts, "products")
+        
+        # Create Main Type-Groupes
+        # Place
+        #   Accommodation
+        #   CivicStructure
+        #      AdministrativeArea
+        #      TransportationSystem
+        #   LocalBusiness
+        #      FoodEstablishment
+        #      LodgingBusiness
+        #   Tour
+        #   Webcam
+        # Event
+        # Product
+        # CreativeWork
+        #   MediaObject
         return self.transformProducts
+    
+    def loadProductsToFile(self, products, fileName):        
+        # Check if folder exists
+        if not os.path.exists("../api/"):
+            os.makedirs("../api/")
+        
+        with open("../api/"+fileName+".json", "w") as file:
+            file.write(json.dumps(products))
