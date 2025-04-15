@@ -71,8 +71,10 @@ class Transform:
             newProduct['openingHours'] = self.languageToJSONLD(product['values']['openingHours'])
             
         if 'openingHoursSpecification' in product['values']:
+            # TODO: Split openingHoursSpecification to specialOpeningHoursSpecification
             newProduct['openingHoursSpecification'] = product['values']['openingHoursSpecification'][0]['data']
-            
+            # TODO: set specialOpeningHoursSpecification
+            #newProduct['specialOpeningHoursSpecification'] = product['values']['specialOpeningHoursSpecification'][0]['data']
         
         # additionalProperty tbd
         if 'openstreetmap_id' in product['values']:
