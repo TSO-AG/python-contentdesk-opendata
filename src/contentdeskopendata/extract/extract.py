@@ -7,7 +7,7 @@ class Extraction:
         self.secret = secret
         self.user = user
         self.passwd = passwd
-        self.produccts = self.getProductsfromTarget(self)
+        self.produccts = self.getProductsfromTarget()
         
     def getProductsfromTarget(self):
         target = Akeneo(self.host, self.clientid, self.secret, self.user, self.passwd)
