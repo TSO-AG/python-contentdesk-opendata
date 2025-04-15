@@ -9,11 +9,11 @@ class Load:
         self.loadProducts = self.setLoadProducts()
         
     def getLoadProducts(self):
-        return self.loadProducts
+        return self.transformProducts
     
     def setLoadProducts(self):
         # All Products to api/products.json
-        self.loadProductsToFile(self.transformProducts, "products")
+        self.loadProductsToFile(self.getLoadProducts(), "products")
         
         # Create Main Type-Groupes
         # Place
