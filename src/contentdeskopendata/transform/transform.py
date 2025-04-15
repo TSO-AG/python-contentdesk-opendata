@@ -53,7 +53,9 @@ class Transform:
         # Images
         if 'image' in product['values']:
             # TODO: Image Group / Array with Gallery-Images
-            newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
+            newProduct['image'] = {}
+            newProduct['image']['@type'] = 'ImageObject'
+            newProduct['image']['contentUrl'] = self.cdnUrl + product['values']['image'][0]['data']
             
         if 'copyrightHolder' in product['values']:
             newProduct['copyrightHolder'] = product['values']['copyrightHolder'][0]['data']
@@ -101,7 +103,9 @@ class Transform:
             address['@type'] = 'PostalAddress'
             address['addressLocality'] = product['values']['addressLocality'][0]['data']
             if 'addressCountry' in product['values']:
-                address['addressCountry'] = product['values']['addressCountry'][0]['data']
+                address['addressCountry'] = {}
+                address['addressCountry']['@type'] = 'Country'
+                address['addressCountry']['name'] = product['values']['addressCountry'][0]['data']
             if 'addressRegion' in product['values']:
                 address['addressRegion'] = product['values']['addressRegion'][0]['data']
             if 'postalCode' in product['values']:
