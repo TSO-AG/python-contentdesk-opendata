@@ -2,6 +2,7 @@ from akeneo.akeneo import Akeneo
 
 class Extraction:
     def __init__(self, host, clientid, secret, user, passwd):
+        print("Extraction")
         self.host = host
         self.clientid = clientid
         self.secret = secret
