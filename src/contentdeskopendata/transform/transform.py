@@ -53,9 +53,11 @@ class Transform:
         # Images
         if 'image' in product['values']:
             # TODO: Image Group / Array with Gallery-Images
-            newProduct['image'] = {}
-            newProduct['image']['@type'] = 'ImageObject'
-            newProduct['image']['contentUrl'] = self.cdnUrl + product['values']['image'][0]['data']
+            newProduct['image'] = []
+            newProduct['image'].append({
+                "@type": "ImageObject",
+                "contentUrl": self.cdnUrl + product['values']['image'][0]['data']
+            })
             
         if 'copyrightHolder' in product['values']:
             newProduct['copyrightHolder'] = product['values']['copyrightHolder'][0]['data']
@@ -77,13 +79,61 @@ class Transform:
             newProduct['openingHoursSpecification'] = product['values']['openingHoursSpecification'][0]['data']
             # TODO: set specialOpeningHoursSpecification
             #newProduct['specialOpeningHoursSpecification'] = product['values']['specialOpeningHoursSpecification'][0]['data']
+            
+        if 'amenityFeature' in product['values']:
+            newProduct['amenityFeature'] = self.setAmenityFeature(product)
+            
+        if 'award' in product['values']:
+            newProduct['award'] = self.setAward(product)
+            
+        if 'publicAccess' in product['values']:
+            newProduct['publicAccess'] = product['values']['publicAccess'][0]['data']
         
-        # additionalProperty tbd
+        if 'isAccessibleForFree' in product['values']:
+            newProduct['isAccessibleForFree'] = product['values']['isAccessibleForFree'][0]['data']
+            
+        if 'offers' in product['values']:
+            newProduct['offers'] = {}
+            newProduct['offers']['@type'] = 'Offer'
+            newProduct['offers']['description'] = self.languageToJSONLD(product['values']['offers'])
+            if 'price' in product['values']:
+                newProduct['offers']['price'] = product['values']['price'][0]['data']
+            #TODO: Variants in Products
+            
+        if 'paymentAccepted' in product['values']:
+            newProduct['paymentAccepted'] = product['values']['paymentAccepted'][0]['data']
+        
+        if 'currenciesAccepted' in product['values']:
+            newProduct['currenciesAccepted'] = product['values']['currenciesAccepted'][0]['data']
+        
+        if 'checkinTime' in product['values']:
+            newProduct['checkinTime'] = product['values']['checkinTime'][0]['data']
+            
+        if 'checkoutTime' in product['values']:
+            newProduct['checkoutTime'] = product['values']['checkoutTime'][0]['data']
+            
+        if 'petsAllowed' in product['values']:
+            newProduct['petsAllowed'] = product['values']['petsAllowed'][0]['data']
+        
+        if 'numberOfRooms' in product['values']:
+            newProduct['numberOfRooms'] = product['values']['numberOfRooms'][0]['data']
+            
+        if 'maximumAttendeeCapacity' in product['values']:
+            newProduct['maximumAttendeeCapacity'] = product['values']['maximumAttendeeCapacity'][0]['data']
+        
+        # additionalProperty tbd'
+        additional_properties = {}
+        
         if 'openstreetmap_id' in product['values']:
-            newProduct['additionalProperty'] = {}
-            newProduct['additionalProperty']['openstreetmap_id'] = product['values']['openstreetmap_id'][0]['data']
+            additional_properties['openstreetmap_id'] = product['values']['openstreetmap_id'][0]['data']
         if 'google_place_id' in product['values']:
-            newProduct['additionalProperty']['google_place_id'] = product['values']['google_place_id'][0]['data']
+            additional_properties['googlePlaceId'] = product['values']['google_place_id'][0]['data']
+        if 'discoverId' in product['values']:
+            additional_properties['discoverSwissId'] = product['values']['discoverId'][0]['data']
+        
+        if additional_properties:
+            newProduct['additionalProperty'] = additional_properties
+            
         return newProduct
     
     def languageToJSONLD(self, languageValue):
@@ -132,3 +182,26 @@ class Transform:
                 priceRange.append(newPrice[0])
             
         return priceRange
+    
+    def setAmenityFeature(self, product):
+        amenityFeature = []
+        for amenity in product['values']['amenityFeature'][0]['data']:
+            newAmenity = {}
+            newAmenity['@type'] = 'LocationFeatureSpecification'
+            # TODO: amenityFeature Label 
+            newAmenity['name'] = amenity
+            newAmenity['value'] = True
+            amenityFeature.append(newAmenity)
+            
+        return amenityFeature
+    
+    def setAward(self, product):
+        award = []
+        for awardValue in product['values']['award'][0]['data']:
+            newAward = {}
+            #newAward['@type'] = 'Certification'
+            #TODO: award Label
+            newAward['name'] = awardValue
+            award.append(newAward)
+            
+        return award
