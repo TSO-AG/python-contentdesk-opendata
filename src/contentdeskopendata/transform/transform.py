@@ -4,10 +4,9 @@ class Transform:
     
     def __init__(self, extractProducts, config):
         self.extractProducts = extractProducts
-        self.transformProducts = self.transformToJSONLD()
+        self.config = config
         self.cdnUrl = config['cdnUrl']
-        print("Transform Config")
-        print(self.getCdnUrl())
+        self.transformProducts = self.transformToJSONLD()
     
     def transformToJSONLD(self):
         jsonLD = []
@@ -52,8 +51,8 @@ class Transform:
                 geo['longitude'] = product['values']['longitude'][0]['data']
             newProduct['geo'] = geo
         # Images
-        if 'image' in product['values']:            
-            newProduct['image'] = self.getCdnUrl() + product['values']['image'][0]['data']
+        if 'image' in product['values']:
+            newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
         # additionalProperty tbd
         return newProduct
     
