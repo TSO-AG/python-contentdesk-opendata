@@ -27,10 +27,9 @@ class Transform:
         newProduct['@context'] = "http://schema.org/"
         newProduct['@type'] = product["family"]
         newProduct['identifier'] = product["identifier"]
-        # TODO: check Categories only from discover.swiss Prefix "_sui"
         if 'leisure' in product['values'] and product['values']['leisure']:
             newProduct['category'] = product['values']['leisure'][0]['data'] 
-        newProduct['dateCreated'] = product['created']
+        #newProduct['dateCreated'] = product['created']
         newProduct['dateModified'] = product['updated']
         # Generel
         if 'name' in product["values"]:
@@ -55,23 +54,38 @@ class Transform:
         if 'image' in product['values']:
             newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
         
+        # priceRange
+        if 'priceRange' in product['values']:
+            newProduct['priceRange'] = product['values']['priceRange'][0]['data']
+        
+        if 'starRating' in product['values']:
+            newProduct['starRating'] = {}
+            newProduct['starRating']['@type'] = 'Rating'
+            newProduct['starRating']['ratingValue'] = product['values']['starRating'][0]['data']
         
         # additionalProperty tbd
+        if 'openstreetmap_id' in product['values']:
+            newProduct['additionalProperty'] = {}
+            newProduct['additionalProperty']['openstreetmap_id'] = product['values']['openstreetmap_id'][0]['data']
+        if 'google_place_id' in product['values']:
+            newProduct['additionalProperty']['google_place_id'] = product['values']['google_place_id'][0]['data']
         return newProduct
     
     def languageToJSONLD(self, languageValue):
         product = {}
         for language in languageValue:
             local = language['locale']
-            product[local] = {}
+            prefixLocale = local.split('_')[0]
+            product[prefixLocale] = {}
             nameValue = language['data']
-            product[local] = nameValue
+            product[prefixLocale] = nameValue
             
         return product
     
     def setAddress(self, product):
         if 'addressLocality' in product['values']:
             address = {}
+            address['@type'] = 'PostalAddress'
             address['addressLocality'] = product['values']['addressLocality'][0]['data']
             if 'addressCountry' in product['values']:
                 address['addressCountry'] = product['values']['addressCountry'][0]['data']
