@@ -53,10 +53,13 @@ class Transform:
         # Images
         if 'image' in product['values']:
             newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
+            
+        if 'copyrightHolder' in product['values']:
+            newProduct['copyrightHolder'] = product['values']['copyrightHolder'][0]['data']
         
         # priceRange
         if 'priceRange' in product['values']:
-            newProduct['priceRange'] = product['values']['priceRange'][0]['data']
+            newProduct['priceRange'] = self.setPriceRange(product)
         
         if 'starRating' in product['values']:
             newProduct['starRating'] = {}
@@ -104,3 +107,15 @@ class Transform:
         else:
             address = None
         return address
+    
+    def setPriceRange(self, product):
+        priceRange = []
+        for price in product['values']['priceRange'][0]['data']:
+            print(price)
+            newPrice = price.split('_')
+            if len(newPrice) == 2:
+                priceRange.append(newPrice[1])
+            else:
+                priceRange.append(newPrice[0])
+            
+        return priceRange
