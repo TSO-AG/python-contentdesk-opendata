@@ -52,6 +52,7 @@ class Transform:
             newProduct['geo'] = geo
         # Images
         if 'image' in product['values']:
+            # TODO: Image Group / Array with Gallery-Images
             newProduct['image'] = self.cdnUrl + product['values']['image'][0]['data']
             
         if 'copyrightHolder' in product['values']:
@@ -65,6 +66,13 @@ class Transform:
             newProduct['starRating'] = {}
             newProduct['starRating']['@type'] = 'Rating'
             newProduct['starRating']['ratingValue'] = product['values']['starRating'][0]['data']
+            
+        if 'openingHours' in product['values']:
+            newProduct['openingHours'] = self.languageToJSONLD(product['values']['openingHours'])
+            
+        if 'openingHoursSpecification' in product['values']:
+            newProduct['openingHoursSpecification'] = product['values']['openingHoursSpecification'][0]['data']
+            
         
         # additionalProperty tbd
         if 'openstreetmap_id' in product['values']:
@@ -111,7 +119,6 @@ class Transform:
     def setPriceRange(self, product):
         priceRange = []
         for price in product['values']['priceRange'][0]['data']:
-            print(price)
             newPrice = price.split('_')
             if len(newPrice) == 2:
                 priceRange.append(newPrice[1])
