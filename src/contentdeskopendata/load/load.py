@@ -4,7 +4,8 @@ from datetime import datetime
 
 class Load:
     
-    def __init__(self, transformProducts):
+    def __init__(self, transformProducts, path):
+        self.path = path
         self.transformProducts = transformProducts
         self.loadProducts = self.setLoadProducts()
         
@@ -35,13 +36,13 @@ class Load:
     def loadProductsToFile(self, products, fileName):        
         # Check if folder exists
         # TODO: Fix Folder Path by Settings
-        if not os.path.exists("../docs/api/"):
-            os.makedirs("../docs/api/")
+        if not os.path.exists(self.path+"/api/"):
+            os.makedirs(self.path+"/api/")
         
-        with open("../docs/api/"+fileName+".json", "w") as file:
+        with open(self.path+"/api/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
         
-    def debugToFile(products, fileName):
+    def debugToFile(products, fileName, path):
          # get current date and time
         current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
         #print("Current date & time : ", current_datetime)
@@ -49,8 +50,8 @@ class Load:
         # convert datetime obj to string
         str_current_datetime = str(current_datetime)
         # Check if folder exists
-        if not os.path.exists("../debug/"+str_current_datetime):
-            os.makedirs("../debug/"+str_current_datetime+"/")
+        if not os.path.exists(path+"/debug/"+str_current_datetime):
+            os.makedirs(path+"/debug/"+str_current_datetime+"/")
         
-        with open("../debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
+        with open(path+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
