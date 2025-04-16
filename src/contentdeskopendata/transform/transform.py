@@ -2,10 +2,9 @@ import json
 
 class Transform:
     
-    def __init__(self, extractProducts, config):
+    def __init__(self, extractProducts, cdnurl):
         self.extractProducts = extractProducts
-        self.config = config
-        self.cdnUrl = config['cdnurl']
+        self.cdnurl = cdnurl
         self.transformProducts = self.transformToJSONLD()
     
     def transformToJSONLD(self):
@@ -20,7 +19,7 @@ class Transform:
         return self.transformProducts
     
     def getCdnUrl(self):
-        return self.cdnUrl
+        return self.cdnurl
     
     def setProductJSONLD(self, product):
         newProduct = {}
