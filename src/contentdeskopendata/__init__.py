@@ -1,6 +1,6 @@
-from src.contentdeskopendata.extract.extract import Extraction
-from src.contentdeskopendata.transform.transform import Transform
-from src.contentdeskopendata.load.load import Load
+from contentdeskopendata.extract.extract import Extraction
+from contentdeskopendata.transform.transform import Transform
+from contentdeskopendata.load.load import Load
 
 class ContentdeskOpenData:
     """
