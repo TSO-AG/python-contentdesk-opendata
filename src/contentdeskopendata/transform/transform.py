@@ -5,7 +5,7 @@ class Transform:
     def __init__(self, extractProducts, config):
         self.extractProducts = extractProducts
         self.config = config
-        self.cdnUrl = config['cdnUrl']
+        self.cdnUrl = config['cdnurl']
         self.transformProducts = self.transformToJSONLD()
     
     def transformToJSONLD(self):
