@@ -55,7 +55,7 @@ class Transform:
             newProduct['image'] = []
             newProduct['image'].append({
                 "@type": "ImageObject",
-                "contentUrl": self.cdnUrl + product['values']['image'][0]['data']
+                "contentUrl": self.cdnurl + product['values']['image'][0]['data']
             })
             
         if 'copyrightHolder' in product['values']:
