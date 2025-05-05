@@ -39,11 +39,11 @@ class Load:
     def loadProductsToFile(self, products, fileName):        
         # Check if folder exists
         # TODO: Fix Folder Path by Settings
-        print("Folder Path: ", self.projectPath+"api/")
-        if not os.path.exists(self.projectPath+"api/"):
-            os.makedirs(self.projectPath+"api/")
+        print("Folder Path: ", self.projectPath+"/api/"+fileName+".json")
+        if not os.path.exists(self.projectPath+"/api/"):
+            os.makedirs(self.projectPath+"/api/")
         
-        with open(self.projectPath+"api/"+fileName+".json", "w") as file:
+        with open(self.projectPath+"/api/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
             
     def setLoadProductsByType(self, products, types):
