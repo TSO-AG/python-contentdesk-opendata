@@ -8,6 +8,7 @@ class Load:
         self.projectPath = projectPath
         self.transformProducts = transformProducts
         self.loadProducts = self.setLoadProducts()
+        self.types = self.loadAllTypes("types")
                
     def getLoadProducts(self):
         return self.transformProducts
@@ -15,6 +16,10 @@ class Load:
     def setLoadProducts(self):
         # All Products to api/products.json
         self.loadProductsToFile(self.transformProducts, "products")
+        
+        PlaceTypes = self.setTypesListbyParent(self, "Place")
+        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
+        self.loadProductsToFile(PlaceObjects, "Place")
         
         # Create Main Type-Groupes
         # Place
@@ -31,8 +36,8 @@ class Load:
         # Product
         # CreativeWork
         #   MediaObject
-        typesObjects = self.setLoadProductsByType(self.transformProducts, ["LocalBusiness", "FoodEstablishment", "LodgingBusiness"])
-        self.loadProductsToFile(typesObjects, "LocalBusiness")
+        LocalBusinessObjects = self.setLoadProductsByType(self.transformProducts, ["LocalBusiness", "FoodEstablishment", "LodgingBusiness"])
+        self.loadProductsToFile(LocalBusinessObjects, "LocalBusiness")
         
         return self.transformProducts
     
@@ -46,13 +51,31 @@ class Load:
         with open(self.projectPath+"/api/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
             
-    def setLoadProductsByType(self, products, types):
-        loadProducts = []
-        for product in products:
-            if product["@type"] in types:
-                loadProducts.append(product)
+    def setTypesListbyParent(self, parentType):
+        types = []
+        for type in self.types:
+            if type["parent"] == parentType:
+                types.append(type)
                 
-        return loadProducts
+        return types
+    
+    def getProductsbyTypes(self, types):
+        products = []
+        for product in self.transformProducts:
+            if product["@types"] in types:
+                products.append(product)
+                
+        return products
+    
+    def loadAllTypes(self):
+        types_file_path = os.path.join(self.projectPath, "types.json")
+        if os.path.exists(types_file_path):
+            with open(types_file_path, "r") as file:
+                types = json.load(file)
+            return types
+        else:
+            print(f"File {types_file_path} does not exist.")
+            return []
         
     def debugToFile(products, fileName, projectPath):
          # get current date and time
