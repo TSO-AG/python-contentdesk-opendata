@@ -14,7 +14,7 @@ class Load:
     
     def setLoadProducts(self):
         # All Products to api/products.json
-        self.loadProductsToFile(self.getLoadProducts(), "products")
+        self.loadProductsToFile(self.transformProducts, "products")
         
         # Create Main Type-Groupes
         # Place
@@ -31,6 +31,9 @@ class Load:
         # Product
         # CreativeWork
         #   MediaObject
+        typesObjects = self.setLoadProductsByType(self.transformProducts, ["LocalBusiness", "FoodEstablishment", "LodgingBusiness"])
+        self.loadProductsToFile(typesObjects, "LocalBusiness")
+        
         return self.transformProducts
     
     def loadProductsToFile(self, products, fileName):        
@@ -42,6 +45,14 @@ class Load:
         
         with open(self.projectPath+"api/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
+            
+    def setLoadProductsByType(self, products, types):
+        loadProducts = []
+        for product in products:
+            if product["@type"] in types:
+                loadProducts.append(product)
+                
+        return loadProducts
         
     def debugToFile(products, fileName, projectPath):
          # get current date and time
