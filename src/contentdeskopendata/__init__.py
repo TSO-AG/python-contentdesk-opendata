@@ -6,7 +6,7 @@ class ContentdeskOpenData:
     """
     ContentdeskOpenData class to extract data from a given target and generate a markdown file.
     """
-    def __init__(self, host, clientid, secret, user, passwd, cdnurl, path):
+    def __init__(self, host, clientid, secret, user, passwd, cdnurl, projectPath):
         print("INIT - ContentdeskOpenData")
         self.host = host
         self.clientid = clientid
@@ -14,12 +14,12 @@ class ContentdeskOpenData:
         self.user = user
         self.passwd = passwd
         self.cdnurl = cdnurl
-        self.path = path
+        self.projectPath = projectPath
         self.extractProducts = Extraction(self.host, self.clientid, self.secret, self.user, self.passwd)
         self.debugExtractProducts()
         self.transformProducts = Transform(self.extractProducts.getProducts(), self.cdnurl)
         self.debugTransformProducts()
-        self.loadProducts = Load(self.transformProducts.getTransformProducts(), self.path)
+        self.loadProducts = Load(self.transformProducts.getTransformProducts(), self.projectPath)
         self.debugLoadProducts()
     
     def getExtractProducts(self):
@@ -35,13 +35,13 @@ class ContentdeskOpenData:
         return self.loadProducts
     
     def debugExtractProducts(self):
-        Load.debugToFile(self.extractProducts.getProducts(), "extractProducts", self.path)
+        Load.debugToFile(self.extractProducts.getProducts(), "extractProducts", self.projectPath)
         print("Debug file extractProducts created")
     
     def debugTransformProducts(self):
-        Load.debugToFile(self.transformProducts.getTransformProducts(), "transformProducts", self.path)
+        Load.debugToFile(self.transformProducts.getTransformProducts(), "transformProducts", self.projectPath)
         print("Debug file transformProducts created")
         
     def debugLoadProducts(self):
-        Load.debugToFile(self.loadProducts.getLoadProducts(), "loadProducts", self.path)
+        Load.debugToFile(self.loadProducts.getLoadProducts(), "loadProducts", self.projectPath)
         print("Debug file loadProducts created")
