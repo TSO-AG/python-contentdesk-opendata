@@ -33,15 +33,28 @@ class Load:
         # CreativeWork
         #   MediaObject
         
-        PlaceTypes = self.setTypesListbyParent("Place")
-        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
-        self.loadProductsToFile(PlaceObjects, "Place")
-        
-        LocalBusinessTypes = self.setTypesListbyParent("LocalBusiness")
-        LocalBusinessObjects = self.getProductsbyTypes(LocalBusinessTypes)
-        self.loadProductsToFile(LocalBusinessObjects, "LocalBusiness")
+        self.createProductListbyParentTyp(self, "Place")
+        self.createProductListbyParentTyp(self, "Accommodation")
+        self.createProductListbyParentTyp(self, "CivicStructure")
+        self.createProductListbyParentTyp(self, "AdministrativeArea")
+        self.createProductListbyParentTyp(self, "TransportationSystem")
+        self.createProductListbyParentTyp(self, "LocalBusiness")
+        self.createProductListbyParentTyp(self, "FoodEstablishment")
+        self.createProductListbyParentTyp(self, "LodgingBusiness")
+        self.createProductListbyParentTyp(self, "Tour")
+        self.createProductListbyParentTyp(self, "Webcam")
+        self.createProductListbyParentTyp(self, "Event")
+        self.createProductListbyParentTyp(self, "Product")
+        self.createProductListbyParentTyp(self, "CreativeWork")
+        self.createProductListbyParentTyp(self, "MediaObject")
         
         return self.transformProducts
+    
+    def createProductListbyParentTyp(self, typeClass):
+        PlaceTypes = self.setTypesListbyParent(typeClass)
+        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
+        self.loadProductsToFile(PlaceObjects, typeClass)
+        return PlaceObjects
     
     def loadProductsToFile(self, products, fileName):        
         # Check if folder exists
