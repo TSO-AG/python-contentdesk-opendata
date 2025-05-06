@@ -68,9 +68,10 @@ class Load:
         return products
     
     def loadAllTypes(self):
-        types_file_path = os.path.join(self.projectPath, "types.json")
-        if os.path.exists(types_file_path):
-            with open(types_file_path, "r") as file:
+        types_file_path = os.path.join(self.projectPath+"/debug/", "types.json")
+        print("Types File Path: ", types_file_path)
+        if os.path.exists(types_file_path+"/debug/"):
+            with open(types_file_path+"/debug/", "r") as file:
                 types = json.load(file)
             return types
         else:
