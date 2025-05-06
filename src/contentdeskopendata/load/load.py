@@ -72,6 +72,8 @@ class Load:
             print("TypeClass: ", self.typesClass[typeClass]['parent'])
             if self.typesClass[typeClass]['parent'] == parentType:
                 types.append(typeClass)
+            elif typeClass == parentType:
+                types.append(typeClass)
         return types
     
     def getProductsbyTypes(self, types):
