@@ -17,7 +17,7 @@ class Load:
         # All Products to api/products.json
         self.loadProductsToFile(self.transformProducts, "products")
         
-        PlaceTypes = self.setTypesListbyParent(self, "Place")
+        PlaceTypes = self.setTypesListbyParent("Place")
         PlaceObjects = self.getProductsbyTypes(PlaceTypes)
         self.loadProductsToFile(PlaceObjects, "Place")
         
