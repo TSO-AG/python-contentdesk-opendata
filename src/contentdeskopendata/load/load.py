@@ -17,10 +17,6 @@ class Load:
         # All Products to api/products.json
         self.loadProductsToFile(self.transformProducts, "products")
         
-        PlaceTypes = self.setTypesListbyParent("Place")
-        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
-        self.loadProductsToFile(PlaceObjects, "Place")
-        
         # Create Main Type-Groupes
         # Place
         #   Accommodation
@@ -36,7 +32,13 @@ class Load:
         # Product
         # CreativeWork
         #   MediaObject
-        LocalBusinessObjects = self.setLoadProductsByType(self.transformProducts, ["LocalBusiness", "FoodEstablishment", "LodgingBusiness"])
+        
+        PlaceTypes = self.setTypesListbyParent("Place")
+        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
+        self.loadProductsToFile(PlaceObjects, "Place")
+        
+        LocalBusinessTypes = self.setTypesListbyParent("LocalBusiness")
+        LocalBusinessObjects = self.getProductsbyTypes(LocalBusinessTypes)
         self.loadProductsToFile(LocalBusinessObjects, "LocalBusiness")
         
         return self.transformProducts
@@ -54,7 +56,7 @@ class Load:
     def setTypesListbyParent(self, parentType):
         types = []
         for type in self.types:
-            if type["parent"] == parentType:
+            if type == parentType:
                 types.append(type)
                 
         return types
@@ -62,16 +64,16 @@ class Load:
     def getProductsbyTypes(self, types):
         products = []
         for product in self.transformProducts:
-            if product["@types"] in types:
+            if product.get("@type") in types:
                 products.append(product)
                 
         return products
     
     def loadAllTypes(self):
-        types_file_path = os.path.join(self.projectPath+"/debug/", "types.json")
+        types_file_path = os.path.join(self.projectPath, "types.json")
         print("Types File Path: ", types_file_path)
-        if os.path.exists(types_file_path+"/debug/"):
-            with open(types_file_path+"/debug/", "r") as file:
+        if os.path.exists(types_file_path):
+            with open(types_file_path, "r") as file:
                 types = json.load(file)
             return types
         else:
