@@ -33,20 +33,20 @@ class Load:
         # CreativeWork
         #   MediaObject
         
-        self.createProductListbyParentTyp(self, "Place")
-        self.createProductListbyParentTyp(self, "Accommodation")
-        self.createProductListbyParentTyp(self, "CivicStructure")
-        self.createProductListbyParentTyp(self, "AdministrativeArea")
-        self.createProductListbyParentTyp(self, "TransportationSystem")
-        self.createProductListbyParentTyp(self, "LocalBusiness")
-        self.createProductListbyParentTyp(self, "FoodEstablishment")
-        self.createProductListbyParentTyp(self, "LodgingBusiness")
-        self.createProductListbyParentTyp(self, "Tour")
-        self.createProductListbyParentTyp(self, "Webcam")
-        self.createProductListbyParentTyp(self, "Event")
-        self.createProductListbyParentTyp(self, "Product")
-        self.createProductListbyParentTyp(self, "CreativeWork")
-        self.createProductListbyParentTyp(self, "MediaObject")
+        self.createProductListbyParentTyp("Place")
+        self.createProductListbyParentTyp("Accommodation")
+        self.createProductListbyParentTyp("CivicStructure")
+        self.createProductListbyParentTyp("AdministrativeArea")
+        self.createProductListbyParentTyp("TransportationSystem")
+        self.createProductListbyParentTyp("LocalBusiness")
+        self.createProductListbyParentTyp("FoodEstablishment")
+        self.createProductListbyParentTyp("LodgingBusiness")
+        self.createProductListbyParentTyp("Tour")
+        self.createProductListbyParentTyp("Webcam")
+        self.createProductListbyParentTyp("Event")
+        self.createProductListbyParentTyp("Product")
+        self.createProductListbyParentTyp("CreativeWork")
+        self.createProductListbyParentTyp("MediaObject")
         
         return self.transformProducts
     
