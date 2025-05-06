@@ -7,7 +7,7 @@ class Load:
     def __init__(self, transformProducts, projectPath):
         self.projectPath = projectPath
         self.transformProducts = transformProducts
-        self.types = self.loadAllTypes()
+        self.typesClass = self.loadAllTypes()
         self.loadProducts = self.setLoadProducts()
                
     def getLoadProducts(self):
@@ -68,12 +68,10 @@ class Load:
             
     def setTypesListbyParent(self, parentType):
         types = []
-        for type in self.types:
-            if type == parentType:
-                types.append(type)
-            elif type.get("parent") == parentType:
-                types.append(type)
-                
+        for typeClass in self.typesClass:
+            print("TypeClass: ", self.typesClass[typeClass]['parent'])
+            if self.typesClass[typeClass]['parent'] == parentType:
+                types.append(typeClass)
         return types
     
     def getProductsbyTypes(self, types):
