@@ -8,7 +8,7 @@ class Load:
         self.projectPath = projectPath
         self.transformProducts = transformProducts
         self.loadProducts = self.setLoadProducts()
-        self.types = self.loadAllTypes("types")
+        self.types = self.loadAllTypes()
                
     def getLoadProducts(self):
         return self.transformProducts
