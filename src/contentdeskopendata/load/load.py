@@ -69,7 +69,6 @@ class Load:
     def setTypesListbyParent(self, parentType):
         types = []
         for typeClass in self.typesClass:
-            print("TypeClass: ", self.typesClass[typeClass]['parent'])
             if self.typesClass[typeClass]['parent'] == parentType:
                 types.append(typeClass)
             elif typeClass == parentType:
