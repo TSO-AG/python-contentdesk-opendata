@@ -7,8 +7,8 @@ class Load:
     def __init__(self, transformProducts, projectPath):
         self.projectPath = projectPath
         self.transformProducts = transformProducts
-        self.loadProducts = self.setLoadProducts()
         self.types = self.loadAllTypes()
+        self.loadProducts = self.setLoadProducts()
                
     def getLoadProducts(self):
         return self.transformProducts
