@@ -51,10 +51,10 @@ class Load:
         return self.transformProducts
     
     def createProductListbyParentTyp(self, typeClass):
-        PlaceTypes = self.setTypesListbyParent(typeClass)
-        PlaceObjects = self.getProductsbyTypes(PlaceTypes)
-        self.loadProductsToFile(PlaceObjects, typeClass)
-        return PlaceObjects
+        types = self.setTypesListbyParent(typeClass)
+        products = self.getProductsbyTypes(types)
+        self.loadProductsToFile(products, typeClass)
+        return products
     
     def loadProductsToFile(self, products, fileName):        
         # Check if folder exists
@@ -70,6 +70,8 @@ class Load:
         types = []
         for type in self.types:
             if type == parentType:
+                types.append(type)
+            elif type.get("parent") == parentType:
                 types.append(type)
                 
         return types
