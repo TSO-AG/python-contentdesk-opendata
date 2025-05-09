@@ -4,8 +4,13 @@ from datetime import datetime
 
 class Load:
     
-    def __init__(self, transformProducts, projectPath):
+    def __init__(self, transformProducts, projectPath, organization, name, website, organization_website, region):
         self.projectPath = projectPath
+        self.organization = organization
+        self.name = name
+        self.website = website
+        self.organization_website = organization_website
+        self.region = region
         self.transformProducts = transformProducts
         self.countProducts = len(self.transformProducts)
         self.typesClass = self.loadAllTypes()
@@ -111,40 +116,68 @@ class Load:
         with open(projectPath+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
     
-    def createMarkDownString(name, filename):
+    def createMarkDownString(self, name, filename):
         string = ""
         
         string += "["+name+"](/api/"+filename+".json)\n"
         
         return string
     
+    def checkLengthinFile(self, fileName):
+        # load the JSON file to check the Objekt lenght in de File
+        file_path = os.path.join(self.projectPath, "api", fileName + ".json")
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                data = json.load(file)
+                # Check the length of the JSON object
+                if isinstance(data, list):
+                    length = len(data)
+                    print(f"Length of {fileName}: {length}")
+                    return length
+                else:
+                    print(f"{fileName} is not a list.")
+                    return 0
+    
     def createMarkDownFile(self):
         # create a markdown file with the name "data.md" in the projectPath
         markdown_file_path = os.path.join(self.projectPath, "data.md")
-        with open(markdown_file_path, "w") as file:
-            file.write("# Willkommen auf dem OpenData Portal der {{ mainPage.app_organization }}\n\n")
-            file.write(str(self.countProducts)+ " freie Datensätze\n")
-            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der {{ page.meta.mainPage.app_region }} wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
-            file.write("**Die Daten dürfen**\n")
+        with open(markdown_file_path, "w", encoding='utf-8') as file:
+            file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
+            file.write(str(self.countProducts)+ " freie Datensätze\n\n")
+            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            file.write("**Die Daten dürfen**\n\n")
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n")
-            file.write("**Haftungsausschluss**\n")
-            file.write("- Die {{ page.meta.mainPage.app_organization }} schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n")
+            file.write("**Haftungsausschluss**\n\n")
+            file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
             file.write("## Daten\n")
             
             dataset = self.createMarkDownString("Alle Produkte", "products")
-            dataset += self.createMarkDownString("Unterkünfte", "Accommodation")
-            dataset += self.createMarkDownString("CivicStructure", "CivicStructure")
-            dataset += self.createMarkDownString("AdministrativeArea", "AdministrativeArea")
-            dataset += self.createMarkDownString("TransportationSystem", "TransportationSystem")
-            dataset += self.createMarkDownString("LocalBusiness", "LocalBusiness")
-            dataset += self.createMarkDownString("FoodEstablishment", "FoodEstablishment")
-            dataset += self.createMarkDownString("LodgingBusiness", "LodgingBusiness")
-            dataset += self.createMarkDownString("Tour", "Tour")
-            dataset += self.createMarkDownString("Webcam", "Webcam")
-            dataset += self.createMarkDownString("Event", "Event")
-            dataset += self.createMarkDownString("Product", "Product")
-            dataset += self.createMarkDownString("CreativeWork", "CreativeWork")
-            dataset += self.createMarkDownString("MediaObject", "MediaObject")
+            if self.checkLengthinFile("Accommodation") > 0:
+                dataset += self.createMarkDownString("Unterkünfte", "Accommodation")
+            if self.checkLengthinFile("CivicStructure") > 0:
+                dataset += self.createMarkDownString("CivicStructure", "CivicStructure")
+            if self.checkLengthinFile("AdministrativeArea") > 0:
+                dataset += self.createMarkDownString("AdministrativeArea", "AdministrativeArea")
+            if self.checkLengthinFile("TransportationSystem") > 0:
+                dataset += self.createMarkDownString("TransportationSystem", "TransportationSystem")
+            if self.checkLengthinFile("LocalBusiness") > 0:
+                dataset += self.createMarkDownString("LocalBusiness", "LocalBusiness")
+            if self.checkLengthinFile("FoodEstablishment") > 0:
+                dataset += self.createMarkDownString("FoodEstablishment", "FoodEstablishment")
+            if self.checkLengthinFile("LodgingBusiness") > 0:
+                dataset += self.createMarkDownString("LodgingBusiness", "LodgingBusiness")
+            if self.checkLengthinFile("Tour") > 0:
+                dataset += self.createMarkDownString("Tour", "Tour")
+            if self.checkLengthinFile("Webcam") > 0:
+                dataset += self.createMarkDownString("Webcam", "Webcam")
+            if self.checkLengthinFile("Event") > 0:
+                dataset += self.createMarkDownString("Event", "Event")
+            if self.checkLengthinFile("Product") > 0:
+                dataset += self.createMarkDownString("Product", "Product")
+            if self.checkLengthinFile("CreativeWork") > 0:
+                dataset += self.createMarkDownString("CreativeWork", "CreativeWork")
+            if self.checkLengthinFile("MediaObject") > 0:
+                dataset += self.createMarkDownString("MediaObject", "MediaObject")
             file.write(dataset)
             
         print(f"Markdown file created at: {markdown_file_path}")
