@@ -111,7 +111,7 @@ class Load:
         with open(projectPath+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
     
-    def createMarkDownString(self, name, filename):
+    def createMarkDownString(name, filename):
         string = ""
         
         string += "["+name+"](/api/"+filename+".json)\n"
@@ -131,20 +131,20 @@ class Load:
             file.write("- Die {{ page.meta.mainPage.app_organization }} schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n")
             file.write("## Daten\n")
             
-            dataset = self.createMarkDownString(self, "Alle Produkte", "products")
-            dataset += self.createMarkDownString(self, "Unterkünfte", "Accommodation")
-            dataset += self.createMarkDownString(self, "CivicStructure", "CivicStructure")
-            dataset += self.createMarkDownString(self, "AdministrativeArea", "AdministrativeArea")
-            dataset += self.createMarkDownString(self, "TransportationSystem", "TransportationSystem")
-            dataset += self.createMarkDownString(self, "LocalBusiness", "LocalBusiness")
-            dataset += self.createMarkDownString(self, "FoodEstablishment", "FoodEstablishment")
-            dataset += self.createMarkDownString(self, "LodgingBusiness", "LodgingBusiness")
-            dataset += self.createMarkDownString(self, "Tour", "Tour")
-            dataset += self.createMarkDownString(self, "Webcam", "Webcam")
-            dataset += self.createMarkDownString(self, "Event", "Event")
-            dataset += self.createMarkDownString(self, "Product", "Product")
-            dataset += self.createMarkDownString(self, "CreativeWork", "CreativeWork")
-            dataset += self.createMarkDownString(self, "MediaObject", "MediaObject")
+            dataset = self.createMarkDownString("Alle Produkte", "products")
+            dataset += self.createMarkDownString("Unterkünfte", "Accommodation")
+            dataset += self.createMarkDownString("CivicStructure", "CivicStructure")
+            dataset += self.createMarkDownString("AdministrativeArea", "AdministrativeArea")
+            dataset += self.createMarkDownString("TransportationSystem", "TransportationSystem")
+            dataset += self.createMarkDownString("LocalBusiness", "LocalBusiness")
+            dataset += self.createMarkDownString("FoodEstablishment", "FoodEstablishment")
+            dataset += self.createMarkDownString("LodgingBusiness", "LodgingBusiness")
+            dataset += self.createMarkDownString("Tour", "Tour")
+            dataset += self.createMarkDownString("Webcam", "Webcam")
+            dataset += self.createMarkDownString("Event", "Event")
+            dataset += self.createMarkDownString("Product", "Product")
+            dataset += self.createMarkDownString("CreativeWork", "CreativeWork")
+            dataset += self.createMarkDownString("MediaObject", "MediaObject")
             file.write(dataset)
             
         print(f"Markdown file created at: {markdown_file_path}")
