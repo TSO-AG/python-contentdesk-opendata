@@ -117,10 +117,10 @@ class Load:
         with open(projectPath+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
     
-    def createMarkDownString(self, name, filename):
+    def createMarkDownString(self, name, filename, count):
         string = ""
         
-        string += "["+name+"](/api/"+filename+".json)\n\n"
+        string += "["+name+" "+count+"](/api/"+filename+".json)\n\n"
         
         return string
     
@@ -158,32 +158,34 @@ class Load:
             file.write("## Datensätze\n")
             
             dataset = self.createMarkDownString("Alle Produkte", "products")
+            if self.checkLengthinFile("Place") > 0:
+                dataset += self.createMarkDownString("Orte", "Place", self.checkLengthinFile("Place"))
             if self.checkLengthinFile("Accommodation") > 0:
-                dataset += self.createMarkDownString("Unterkünfte", "Accommodation")
+                dataset += self.createMarkDownString("Unterkünfte", "Accommodation", self.checkLengthinFile("Accommodation"))
             if self.checkLengthinFile("CivicStructure") > 0:
-                dataset += self.createMarkDownString("Öffentliche Anlage/Einrichtung", "CivicStructure")
+                dataset += self.createMarkDownString("Öffentliche Anlage/Einrichtung", "CivicStructure", self.checkLengthinFile("CivicStructure"))
             if self.checkLengthinFile("AdministrativeArea") > 0:
-                dataset += self.createMarkDownString("Verwaltungsgebiet", "AdministrativeArea")
+                dataset += self.createMarkDownString("Verwaltungsgebiet", "AdministrativeArea", self.checkLengthinFile("AdministrativeArea"))
             if self.checkLengthinFile("TransportationSystem") > 0:
-                dataset += self.createMarkDownString("Transportsystemstation", "TransportationSystem")
+                dataset += self.createMarkDownString("Transportsystemstation", "TransportationSystem", self.checkLengthinFile("TransportationSystem"))
             if self.checkLengthinFile("LocalBusiness") > 0:
-                dataset += self.createMarkDownString("Lokale Geschäfte / Freizeit / Dienstleistung", "LocalBusiness")
+                dataset += self.createMarkDownString("Lokale Geschäfte / Freizeit / Dienstleistung", "LocalBusiness", self.checkLengthinFile("LocalBusiness"))
             if self.checkLengthinFile("FoodEstablishment") > 0:
-                dataset += self.createMarkDownString("Gastronomie", "FoodEstablishment")
+                dataset += self.createMarkDownString("Gastronomie", "FoodEstablishment", self.checkLengthinFile("FoodEstablishment"))
             if self.checkLengthinFile("LodgingBusiness") > 0:
-                dataset += self.createMarkDownString("Beherbergungsbetrieb", "LodgingBusiness")
+                dataset += self.createMarkDownString("Beherbergungsbetrieb", "LodgingBusiness", self.checkLengthinFile("LodgingBusiness"))
             if self.checkLengthinFile("Tour") > 0:
-                dataset += self.createMarkDownString("Tour", "Tour")
+                dataset += self.createMarkDownString("Tour", "Tour", self.checkLengthinFile("Tour"))
             if self.checkLengthinFile("Webcam") > 0:
-                dataset += self.createMarkDownString("Webcam", "Webcam")
+                dataset += self.createMarkDownString("Webcam", "Webcam", self.checkLengthinFile("Webcam"))
             if self.checkLengthinFile("Event") > 0:
-                dataset += self.createMarkDownString("Event", "Event")
+                dataset += self.createMarkDownString("Event", "Event", self.checkLengthinFile("Event"))
             if self.checkLengthinFile("Product") > 0:
-                dataset += self.createMarkDownString("Produkte", "Product")
+                dataset += self.createMarkDownString("Produkte", "Product", self.checkLengthinFile("Product"))
             if self.checkLengthinFile("CreativeWork") > 0:
-                dataset += self.createMarkDownString("Kreative Arbeit", "CreativeWork")
+                dataset += self.createMarkDownString("Kreative Arbeit", "CreativeWork", self.checkLengthinFile("CreativeWork"))
             if self.checkLengthinFile("MediaObject") > 0:
-                dataset += self.createMarkDownString("Medienobjekt", "MediaObject")
+                dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
             
         print(f"Markdown file created at: {markdown_file_path}")
