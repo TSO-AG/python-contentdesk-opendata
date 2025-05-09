@@ -122,8 +122,8 @@ class Load:
         # create a markdown file with the name "data.md" in the projectPath
         markdown_file_path = os.path.join(self.projectPath, "data.md")
         with open(markdown_file_path, "w") as file:
-            file.write("# # Willkommen auf dem OpenData Portal der {{ mainPage.app_organization }}\n\n")
-            file.write(self.countProducts+ " freie Datensätze\n")
+            file.write("# Willkommen auf dem OpenData Portal der {{ mainPage.app_organization }}\n\n")
+            file.write(str(self.countProducts)+ " freie Datensätze\n")
             file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der {{ page.meta.mainPage.app_region }} wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
             file.write("**Die Daten dürfen**\n")
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n")
