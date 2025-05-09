@@ -10,6 +10,7 @@ class Load:
         self.typesClass = self.loadAllTypes()
         self.loadProducts = self.setLoadProducts()
         self.createMarkDownFile()
+        self.countProducts = len(self.transformProducts)
                
     def getLoadProducts(self):
         return self.transformProducts
@@ -109,16 +110,41 @@ class Load:
         
         with open(projectPath+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
-            
+    
+    def createMarkDownString(self, name, filename):
+        string = ""
+        
+        string += "["+name+"](/api/"+filename+".json)\n"
+        
+        return string
+    
     def createMarkDownFile(self):
         # create a markdown file with the name "data.md" in the projectPath
         markdown_file_path = os.path.join(self.projectPath, "data.md")
         with open(markdown_file_path, "w") as file:
-            file.write("# Data Overview\n\n")
-            file.write("This markdown file provides an overview of the data processed by the Load class.\n\n")
-            file.write("## Product Types\n")
-            for typeClass in self.typesClass:
-                file.write(f"- {typeClass}\n")
-                file.write("\n## Total Products\n")
-                file.write(f"- {len(self.transformProducts)} products\n")
+            file.write("# # Willkommen auf dem OpenData Portal der {{ mainPage.app_organization }}\n\n")
+            file.write(self.countProducts+ " freie Datensätze\n")
+            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der {{ page.meta.mainPage.app_region }} wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            file.write("**Die Daten dürfen**\n")
+            file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n")
+            file.write("**Haftungsausschluss**\n")
+            file.write("- Die {{ page.meta.mainPage.app_organization }} schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n")
+            file.write("## Daten\n")
+            
+            dataset = self.createMarkDownString(self, "Alle Produkte", "products")
+            dataset += self.createMarkDownString(self, "Unterkünfte", "Accommodation")
+            dataset += self.createMarkDownString(self, "CivicStructure", "CivicStructure")
+            dataset += self.createMarkDownString(self, "AdministrativeArea", "AdministrativeArea")
+            dataset += self.createMarkDownString(self, "TransportationSystem", "TransportationSystem")
+            dataset += self.createMarkDownString(self, "LocalBusiness", "LocalBusiness")
+            dataset += self.createMarkDownString(self, "FoodEstablishment", "FoodEstablishment")
+            dataset += self.createMarkDownString(self, "LodgingBusiness", "LodgingBusiness")
+            dataset += self.createMarkDownString(self, "Tour", "Tour")
+            dataset += self.createMarkDownString(self, "Webcam", "Webcam")
+            dataset += self.createMarkDownString(self, "Event", "Event")
+            dataset += self.createMarkDownString(self, "Product", "Product")
+            dataset += self.createMarkDownString(self, "CreativeWork", "CreativeWork")
+            dataset += self.createMarkDownString(self, "MediaObject", "MediaObject")
+            file.write(dataset)
+            
         print(f"Markdown file created at: {markdown_file_path}")
