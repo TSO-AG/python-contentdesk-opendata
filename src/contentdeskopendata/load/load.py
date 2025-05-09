@@ -17,6 +17,7 @@ class Load:
         self.loadProducts = self.setLoadProducts()
         self.createMarkDownFileIndex()
         self.createMarkDownFileDocumentation()
+        self.copyFileCategory()
                
     def getLoadProducts(self):
         return self.transformProducts
@@ -207,7 +208,7 @@ class Load:
             file.write("## API Endpoints\n\n")
             file.write("The main endpoint of the API is located at [/api](/api). The API can be used to retrieve all the available categories, or to retrieve all the objects tagged with a specific category.\n\n")
             file.write("## Categories list\n\n")
-            file.write("By just calling the endpoint, [/api/category](/api/category), without any other parameters, the result is a list of all the available categories. The category items are stored as a hierarchical tree, so each of the category items has also a reference to its parent. If the parent is \"null\", then the category is a root item. An excerpt from the result list can be seen below:\n\n")
+            file.write("By just calling the endpoint, [/api/category](/api/category.json), without any other parameters, the result is a list of all the available categories. The category items are stored as a hierarchical tree, so each of the category items has also a reference to its parent. If the parent is \"null\", then the category is a root item. An excerpt from the result list can be seen below:\n\n")
             file.write("```json\n")
             file.write("{\"code\":\"ostschweiz_unterkuenfte\",\"parent\":\"ostschweiz\",\"labels\":{\"de_CH\":\"Unterkünfte\",\"en_US\":\"Accommodation\",\"fr_FR\":\"Hébergement\",\"it_IT\":\"Alloggio\"}}\n")
             file.write("```\n\n")
@@ -236,3 +237,15 @@ class Load:
         
         print(f"Markdown file created at: {markdown_file_path}")
 
+    def copyFileCategory(self):
+        # copy the file category.json from the projectPath to the api folder
+        source = os.path.join(self.projectPath, "category.json")
+        destination = os.path.join(self.projectPath, "api", "category.json")
+        if os.path.exists(source):
+            with open(source, "r") as src_file:
+                data = json.load(src_file)
+            with open(destination, "w") as dest_file:
+                json.dump(data, dest_file)
+            print(f"File copied from {source} to {destination}")
+        else:
+            print(f"Source file {source} does not exist.")
