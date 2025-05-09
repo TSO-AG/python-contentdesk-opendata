@@ -7,10 +7,10 @@ class Load:
     def __init__(self, transformProducts, projectPath):
         self.projectPath = projectPath
         self.transformProducts = transformProducts
+        self.countProducts = len(self.transformProducts)
         self.typesClass = self.loadAllTypes()
         self.loadProducts = self.setLoadProducts()
         self.createMarkDownFile()
-        self.countProducts = len(self.transformProducts)
                
     def getLoadProducts(self):
         return self.transformProducts
