@@ -9,6 +9,7 @@ class Load:
         self.transformProducts = transformProducts
         self.typesClass = self.loadAllTypes()
         self.loadProducts = self.setLoadProducts()
+        self.createMarkDownFile()
                
     def getLoadProducts(self):
         return self.transformProducts
@@ -108,3 +109,16 @@ class Load:
         
         with open(projectPath+"/debug/"+str_current_datetime+"/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
+            
+    def createMarkDownFile(self):
+        # create a markdown file with the name "data.md" in the projectPath
+        markdown_file_path = os.path.join(self.projectPath, "data.md")
+        with open(markdown_file_path, "w") as file:
+            file.write("# Data Overview\n\n")
+            file.write("This markdown file provides an overview of the data processed by the Load class.\n\n")
+            file.write("## Product Types\n")
+            for typeClass in self.typesClass:
+                file.write(f"- {typeClass}\n")
+                file.write("\n## Total Products\n")
+                file.write(f"- {len(self.transformProducts)} products\n")
+        print(f"Markdown file created at: {markdown_file_path}")
