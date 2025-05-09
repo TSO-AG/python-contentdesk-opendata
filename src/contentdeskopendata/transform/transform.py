@@ -45,6 +45,7 @@ class Transform:
         # Geo
         if 'latitude' in product['values']:
             geo = {}
+            geo['@type'] = 'GeoCoordinates'
             geo['latitude'] = product['values']['latitude'][0]['data']
             if 'longitude' in product['values']:
                 geo['longitude'] = product['values']['longitude'][0]['data']
