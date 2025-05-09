@@ -54,8 +54,8 @@ class Load:
         self.createProductListbyParentTyp("Webcam")
         self.createProductListbyParentTyp("Event")
         self.createProductListbyParentTyp("Product")
-        self.createProductListbyParentTyp("CreativeWork")
-        self.createProductListbyParentTyp("MediaObject")
+        #self.createProductListbyParentTyp("CreativeWork")
+        #self.createProductListbyParentTyp("MediaObject")
         
         return self.transformProducts
     
