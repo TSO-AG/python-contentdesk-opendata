@@ -120,7 +120,7 @@ class Load:
     def createMarkDownString(self, name, filename, count):
         string = ""
         
-        string += "["+name+" "+count+"](/api/"+filename+".json)\n\n"
+        string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
         
         return string
     
@@ -157,7 +157,7 @@ class Load:
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
             file.write("## Datensätze\n")
             
-            dataset = self.createMarkDownString("Alle Produkte", "products")
+            dataset = self.createMarkDownString("Alle Produkte", "products", self.checkLengthinFile("products"))
             if self.checkLengthinFile("Place") > 0:
                 dataset += self.createMarkDownString("Orte", "Place", self.checkLengthinFile("Place"))
             if self.checkLengthinFile("Accommodation") > 0:

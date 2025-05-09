@@ -32,7 +32,7 @@ class Transform:
         newProduct['dateModified'] = product['updated']
         # Generel
         if 'name' in product["values"]:
-            newProduct['name']= self.languageToJSONLD(product["values"]['name']) ,
+            newProduct['name']= self.languageToJSONLD(product["values"]['name'])
         if 'disambiguatingDescription' in product["values"]:
             newProduct['disambiguatingDescription'] = self.languageToJSONLD(product["values"]['disambiguatingDescription']) 
         if 'description' in product["values"]:
