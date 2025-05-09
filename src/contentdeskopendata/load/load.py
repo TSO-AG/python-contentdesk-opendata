@@ -15,7 +15,8 @@ class Load:
         self.countProducts = len(self.transformProducts)
         self.typesClass = self.loadAllTypes()
         self.loadProducts = self.setLoadProducts()
-        self.createMarkDownFile()
+        self.createMarkDownFileIndex()
+        self.createMarkDownFileDocumentation()
                
     def getLoadProducts(self):
         return self.transformProducts
@@ -138,15 +139,20 @@ class Load:
                     print(f"{fileName} is not a list.")
                     return 0
     
-    def createMarkDownFile(self):
+    def createMarkDownFileIndex(self):
         # create a markdown file with the name "data.md" in the projectPath
-        markdown_file_path = os.path.join(self.projectPath, "data.md")
+        markdown_file_path = os.path.join(self.projectPath, "index.md")
         with open(markdown_file_path, "w", encoding='utf-8') as file:
+            file.write("---\n")
+            file.write("hide:\n")
+            file.write("  - navigation\n")
+            file.write("  - toc\n")
+            file.write("---\n")
             file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
             file.write(str(self.countProducts)+ " freie Datensätze\n\n")
             file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
             file.write("**Die Daten dürfen**\n\n")
-            file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n")
+            file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
             file.write("## Daten\n")
@@ -181,3 +187,19 @@ class Load:
             file.write(dataset)
             
         print(f"Markdown file created at: {markdown_file_path}")
+        
+    def createMarkDownFileDocumentation(self):
+        # Load the documentation.md file from the load package folder
+        documentation_file_path = os.path.join(os.path.dirname(__file__), "documentation.md")
+        target_file_path = os.path.join(self.projectPath, "documentation.md")
+        
+        if os.path.exists(documentation_file_path):
+            with open(documentation_file_path, "r", encoding='utf-8') as source_file:
+                content = source_file.read()
+            
+            with open(target_file_path, "w", encoding='utf-8') as target_file:
+                target_file.write(content)
+            
+            print(f"Documentation file copied to: {target_file_path}")
+        else:
+            print(f"Documentation file not found at: {documentation_file_path}")
