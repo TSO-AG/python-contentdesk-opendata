@@ -54,8 +54,8 @@ class Load:
         self.createProductListbyParentTyp("Webcam")
         self.createProductListbyParentTyp("Event")
         self.createProductListbyParentTyp("Product")
-        #self.createProductListbyParentTyp("CreativeWork")
-        #self.createProductListbyParentTyp("MediaObject")
+        self.createProductListbyParentTyp("CreativeWork")
+        self.createProductListbyParentTyp("MediaObject")
         
         return self.transformProducts
     
@@ -183,10 +183,10 @@ class Load:
                 dataset += self.createMarkDownString("Event", "Event", self.checkLengthinFile("Event"))
             if self.checkLengthinFile("Product") > 0:
                 dataset += self.createMarkDownString("Produkte", "Product", self.checkLengthinFile("Product"))
-            if self.checkLengthinFile("CreativeWork") > 0:
-                dataset += self.createMarkDownString("Kreative Arbeit", "CreativeWork", self.checkLengthinFile("CreativeWork"))
-            if self.checkLengthinFile("MediaObject") > 0:
-                dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
+            # if self.checkLengthinFile("CreativeWork") > 0:
+            #    dataset += self.createMarkDownString("Kreative Arbeit", "CreativeWork", self.checkLengthinFile("CreativeWork"))
+            # if self.checkLengthinFile("MediaObject") > 0:
+            #    dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
             
         print(f"Markdown file created at: {markdown_file_path}")
