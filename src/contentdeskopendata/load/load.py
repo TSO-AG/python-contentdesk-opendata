@@ -152,11 +152,11 @@ class Load:
             file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
             file.write(str(self.countProducts)+ " freie Datensätze\n\n")
             file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            file.write("[Dokumnetation](documentation)\n\n")
             file.write("**Die Daten dürfen**\n\n")
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
-            file.write("[Dokumnetation](documentation)\n\n")
             file.write("## Datensätze\n")
             
             dataset = self.createMarkDownString("Alle Produkte", "products", self.checkLengthinFile("products"))
