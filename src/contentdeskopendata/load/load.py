@@ -156,6 +156,7 @@ class Load:
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
+            file.write("[Zur Dokumnetation](documentation){ .md-button }\n\n")
             file.write("## Datensätze\n")
             
             dataset = self.createMarkDownString("Alle Produkte", "products", self.checkLengthinFile("products"))
