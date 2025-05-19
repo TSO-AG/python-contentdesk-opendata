@@ -231,7 +231,7 @@ class Load:
         
         #string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
 
-        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json) [:fontawesome-solid-file-csv:](/api/"+filename+".csv) [:simple-rss:](/api/"+filename+".rss)  |\n"
+        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json){ .md-button } [:fontawesome-solid-file-csv:](/api/"+filename+".csv){ .md-button } [:simple-rss:](/api/"+filename+".rss){ .md-button }  |\n"
         
         return string
     
