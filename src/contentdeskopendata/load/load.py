@@ -44,19 +44,33 @@ class Load:
         #   MediaObject
         
         self.createProductListbyParentTyp("Place")
+        self.loadRSSFeed(self.transformProducts, "Place", "Place")
         self.createProductListbyParentTyp("Accommodation")
+        self.loadRSSFeed(self.transformProducts, "Accommodation", "Accommodation")
         self.createProductListbyParentTyp("CivicStructure")
+        self.loadRSSFeed(self.transformProducts, "CivicStructure", "CivicStructure")
         self.createProductListbyParentTyp("AdministrativeArea")
+        self.loadRSSFeed(self.transformProducts, "AdministrativeArea", "AdministrativeArea")
         self.createProductListbyParentTyp("TransportationSystem")
+        self.loadRSSFeed(self.transformProducts, "TransportationSystem", "TransportationSystem")
         self.createProductListbyParentTyp("LocalBusiness")
+        self.loadRSSFeed(self.transformProducts, "LocalBusiness", "LocalBusiness")
         self.createProductListbyParentTyp("FoodEstablishment")
+        self.loadRSSFeed(self.transformProducts, "FoodEstablishment", "FoodEstablishment")
         self.createProductListbyParentTyp("LodgingBusiness")
+        self.loadRSSFeed(self.transformProducts, "LodgingBusiness", "LodgingBusiness")
         self.createProductListbyParentTyp("Tour")
+        self.loadRSSFeed(self.transformProducts, "Tour", "Tour")
         self.createProductListbyParentTyp("Webcam")
+        self.loadRSSFeed(self.transformProducts, "Webcam", "Webcam")
         self.createProductListbyParentTyp("Event")
+        self.loadRSSFeed(self.transformProducts, "Event", "Event")
         self.createProductListbyParentTyp("Product")
+        self.loadRSSFeed(self.transformProducts, "Product", "Product")
         self.createProductListbyParentTyp("CreativeWork")
+        self.loadRSSFeed(self.transformProducts, "CreativeWork", "CreativeWork")
         self.createProductListbyParentTyp("MediaObject")
+        self.loadRSSFeed(self.transformProducts, "MediaObject", "MediaObject")
         
         return self.transformProducts
     
@@ -73,7 +87,7 @@ class Load:
         if not os.path.exists(self.projectPath+"/api/"):
             os.makedirs(self.projectPath+"/api/")
         
-        with open(self.projectPath+"/api/"+fileName+".json", "w") as file:
+        with open(self.projectPath+"/api/"+fileName+".json", "w", encoding="utf-8") as file:
             file.write(json.dumps(products))
     
     def loadRSSFeed(self, products, fileName, title):
@@ -93,15 +107,16 @@ class Load:
         rssFeed += '<generator>Contentdesk.io</generator>'
         for product in products:
             rssFeed += '<item>'
-            rssFeed += '<title>'+ product['name'] +'</title>'
-            if product['address'] != None:
-                rssFeed += '<link>'+ product['address']['url'] +'</link>'
+            rssFeed += '<title>'+ str(product['name']['de']) +'</title>'
+            if 'address' in product:
+                if 'url' in product['address']:
+                    rssFeed += '<link>'+ product['address']['url'] +'</link>'
             else:
                 rssFeed += '<link>'+ self.organization_website +'</link>'
-            if product['description'] != None:
-                rssFeed += '<description>'+ product['description'] +'</description>'
-            if product['image'] != None:
-                rssFeed += '<enclosure length="" type="image/jpeg" url="'+ product['image'] +'" />'
+            if 'description' in product:
+                rssFeed += '<description>'+ str(product['description']['de']) +'</description>'
+            if 'image' in product:
+                rssFeed += '<enclosure length="" type="image/jpeg" url="'+ str(product['image'][0]['contentUrl']) +'" />'
             rssFeed += '<guid isPermaLink="false">'+ product['identifier'] +'</guid>'
             rssFeed += '<pubDate>'+ product['dateModified'] +'</pubDate>'
         
@@ -115,8 +130,8 @@ class Load:
         if not os.path.exists(self.projectPath+"/api/"):
             os.makedirs(self.projectPath+"/api/")
         
-        with open(self.projectPath+"/api/"+fileName+".rss", "w") as file:
-            file.write(json.dumps(products))
+        with open(self.projectPath+"/api/"+fileName+".rss", "w", encoding="utf-8") as file:
+            file.write(products)
            
     def setTypesListbyParent(self, parentType):
         types = []
