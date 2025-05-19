@@ -25,6 +25,7 @@ class Load:
     def setLoadProducts(self):
         # All Products to api/products.json
         self.loadProductsToFile(self.transformProducts, "products")
+        self.loadRSSFeed(self.transformProducts, "products", "Alle Daten")
         
         # Create Main Type-Groupes
         # Place
@@ -74,7 +75,49 @@ class Load:
         
         with open(self.projectPath+"/api/"+fileName+".json", "w") as file:
             file.write(json.dumps(products))
-            
+    
+    def loadRSSFeed(self, products, fileName, title):
+        # Check if folder exists
+        
+        rssProducts = self.generateRSSFeed(products, fileName, title)
+        
+        self.createRSSFeed(rssProducts, fileName)
+    
+    def generateRSSFeed(self, products, fileName, title):
+        rssFeed = '<rss version="2.0">'
+        rssFeed += '<channel>'
+        rssFeed += '<title>'+ self.name + ' - '+ title +'</title>'
+        rssFeed += '<link>'+ self.website +'/api/'+fileName+'.rss</link>'
+        rssFeed += '<language>de</language>'
+        rssFeed += '<docs>'+ self.website +'/api/</docs>'
+        rssFeed += '<generator>Contentdesk.io</generator>'
+        for product in products:
+            rssFeed += '<item>'
+            rssFeed += '<title>'+ product['name'] +'</title>'
+            if product['address'] != None:
+                rssFeed += '<link>'+ product['address']['url'] +'</link>'
+            else:
+                rssFeed += '<link>'+ self.organization_website +'</link>'
+            if product['description'] != None:
+                rssFeed += '<description>'+ product['description'] +'</description>'
+            if product['image'] != None:
+                rssFeed += '<enclosure length="" type="image/jpeg" url="'+ product['image'] +'" />'
+            rssFeed += '<guid isPermaLink="false">'+ product['identifier'] +'</guid>'
+            rssFeed += '<pubDate>'+ product['dateModified'] +'</pubDate>'
+        
+        rssFeed += '</channel>'
+        rssFeed += '</rss>'
+        return rssFeed
+    
+    def createRSSFeed(self, products, fileName):
+        # Check if folder exists
+        print("Folder Path: ", self.projectPath+"/api/"+fileName+".rss")
+        if not os.path.exists(self.projectPath+"/api/"):
+            os.makedirs(self.projectPath+"/api/")
+        
+        with open(self.projectPath+"/api/"+fileName+".rss", "w") as file:
+            file.write(json.dumps(products))
+           
     def setTypesListbyParent(self, parentType):
         types = []
         for typeClass in self.typesClass:
