@@ -231,7 +231,7 @@ class Load:
         
         #string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
 
-        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [JSON-LD](/api/"+filename+".json) [CSV](/api/"+filename+".csv) [RSS](/api/"+filename+".rss)  |\n"
+        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json) [:fontawesome-solid-file-csv:](/api/"+filename+".csv) [:simple-rss:](/api/"+filename+".rss)  |\n"
         
         return string
     
@@ -262,7 +262,7 @@ class Load:
             file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
             file.write(str(self.countProducts)+ " freie Datensätze\n\n")
             file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
-            file.write("[Dokumentation](documentation)\n\n")
+            file.write("[Dokumnetation](documentation)\n\n")
             file.write("**Die Daten dürfen**\n\n")
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
