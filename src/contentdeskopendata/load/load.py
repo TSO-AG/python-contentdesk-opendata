@@ -316,7 +316,7 @@ class Load:
             file.write("---\n\n")
             file.write("# Documentation\n\n")
             file.write("## Introduction\n\n")
-            file.write("This document describes the open data API of "+self.website+" for retrieving information about places and accommodation locations published on the site. Each of these entities are also tagged with one or more categories. The following objects can be retrieved via the API:\n\n")
+            file.write("This document describes the open data API of /api for retrieving information about places and accommodation locations published on the site. Each of these entities are also tagged with one or more categories. The following objects can be retrieved via the API:\n\n")
             file.write("* Places like restaurants, museums, points of interest\n")
             file.write("* Accommodations\n\n")
             file.write("## API Endpoints\n\n")
