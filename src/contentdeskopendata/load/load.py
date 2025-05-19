@@ -25,7 +25,7 @@ class Load:
     def setLoadProducts(self):
         # All Products to api/products.json
         self.loadProductsToFile(self.transformProducts, "products")
-        self.loadRSSFeed(self.transformProducts, "products", "Alle Daten")
+        self.loadFormats(self.transformProducts, "products", "Alle Daten")
         
         # Create Main Type-Groupes
         # Place
@@ -44,33 +44,33 @@ class Load:
         #   MediaObject
         
         self.createProductListbyParentTyp("Place")
-        self.loadRSSFeed(self.transformProducts, "Place", "Place")
+        self.loadFormats(self.transformProducts, "Place", "Place")
         self.createProductListbyParentTyp("Accommodation")
-        self.loadRSSFeed(self.transformProducts, "Accommodation", "Accommodation")
+        self.loadFormats(self.transformProducts, "Accommodation", "Accommodation")
         self.createProductListbyParentTyp("CivicStructure")
-        self.loadRSSFeed(self.transformProducts, "CivicStructure", "CivicStructure")
+        self.loadFormats(self.transformProducts, "CivicStructure", "CivicStructure")
         self.createProductListbyParentTyp("AdministrativeArea")
-        self.loadRSSFeed(self.transformProducts, "AdministrativeArea", "AdministrativeArea")
+        self.loadFormats(self.transformProducts, "AdministrativeArea", "AdministrativeArea")
         self.createProductListbyParentTyp("TransportationSystem")
-        self.loadRSSFeed(self.transformProducts, "TransportationSystem", "TransportationSystem")
+        self.loadFormats(self.transformProducts, "TransportationSystem", "TransportationSystem")
         self.createProductListbyParentTyp("LocalBusiness")
-        self.loadRSSFeed(self.transformProducts, "LocalBusiness", "LocalBusiness")
+        self.loadFormats(self.transformProducts, "LocalBusiness", "LocalBusiness")
         self.createProductListbyParentTyp("FoodEstablishment")
-        self.loadRSSFeed(self.transformProducts, "FoodEstablishment", "FoodEstablishment")
+        self.loadFormats(self.transformProducts, "FoodEstablishment", "FoodEstablishment")
         self.createProductListbyParentTyp("LodgingBusiness")
-        self.loadRSSFeed(self.transformProducts, "LodgingBusiness", "LodgingBusiness")
+        self.loadFormats(self.transformProducts, "LodgingBusiness", "LodgingBusiness")
         self.createProductListbyParentTyp("Tour")
-        self.loadRSSFeed(self.transformProducts, "Tour", "Tour")
+        self.loadFormats(self.transformProducts, "Tour", "Tour")
         self.createProductListbyParentTyp("Webcam")
-        self.loadRSSFeed(self.transformProducts, "Webcam", "Webcam")
+        self.loadFormats(self.transformProducts, "Webcam", "Webcam")
         self.createProductListbyParentTyp("Event")
-        self.loadRSSFeed(self.transformProducts, "Event", "Event")
+        self.loadFormats(self.transformProducts, "Event", "Event")
         self.createProductListbyParentTyp("Product")
-        self.loadRSSFeed(self.transformProducts, "Product", "Product")
+        self.loadFormats(self.transformProducts, "Product", "Product")
         self.createProductListbyParentTyp("CreativeWork")
-        self.loadRSSFeed(self.transformProducts, "CreativeWork", "CreativeWork")
+        self.loadFormats(self.transformProducts, "CreativeWork", "CreativeWork")
         self.createProductListbyParentTyp("MediaObject")
-        self.loadRSSFeed(self.transformProducts, "MediaObject", "MediaObject")
+        self.loadFormats(self.transformProducts, "MediaObject", "MediaObject")
         
         return self.transformProducts
     
@@ -90,12 +90,53 @@ class Load:
         with open(self.projectPath+"/api/"+fileName+".json", "w", encoding="utf-8") as file:
             file.write(json.dumps(products))
     
-    def loadRSSFeed(self, products, fileName, title):
+    def loadFormats(self, products, fileName, title):
         # Check if folder exists
         
         rssProducts = self.generateRSSFeed(products, fileName, title)
+        csvProducts = self.generateCSV(products)
         
         self.createRSSFeed(rssProducts, fileName)
+        self.createCSV(csvProducts, fileName)
+    
+    def generateCSV(self, products):
+        csvProducts = ""
+        csvProducts += "id;name;disambiguatingDescription;description;longitude;latitude;streetAddress;postalCode;addressLocality;telephone;email;url;image;dateModified"
+
+        for item in products:
+            csvProducts += item['identifier']+";"+item['name']['de']+";"
+            if 'disambiguatingDescription' in item:
+                if 'de' in item['disambiguatingDescription']:
+                    csvProducts += item['disambiguatingDescription']['de']+";"
+                else:
+                    csvProducts += ";"
+            if 'description' in item:
+                if 'de' in item['description']:
+                    csvProducts += item['description']['de']+";"
+                else:
+                    csvProducts += ";"
+            if 'geo' in item:
+                if 'longitude' in item['geo']: 
+                    csvProducts += item['geo']['longitude']+";"+item['geo']['latitude']+";"
+            if 'address' in item:
+                if 'streetAddress' in item['address']:
+                    csvProducts += item['address']['streetAddress']+";"
+                if 'postalCode' in item['address']:
+                    csvProducts += item['address']['postalCode']+";"
+                if 'addressLocality' in item['address']:
+                    csvProducts += item['address']['addressLocality']+";"
+                if 'telephone' in item['address']:
+                    csvProducts += item['address']['telephone']+";"
+                if 'email' in item['address']:
+                    csvProducts += item['address']['email']+";"
+                if 'url' in item['address']:
+                    csvProducts += item['address']['url']+";"
+            if 'image' in item:
+                csvProducts += str(item['image'])+";"
+            csvProducts += item['dateModified']+"\n"
+
+        return csvProducts
+    
     
     def generateRSSFeed(self, products, fileName, title):
         rssFeed = '<rss version="2.0">'
@@ -131,6 +172,15 @@ class Load:
             os.makedirs(self.projectPath+"/api/")
         
         with open(self.projectPath+"/api/"+fileName+".rss", "w", encoding="utf-8") as file:
+            file.write(products)
+    
+    def createCSV(self, products, fileName):
+        # Check if folder exists
+        print("Folder Path: ", self.projectPath+"/api/"+fileName+".csv")
+        if not os.path.exists(self.projectPath+"/api/"):
+            os.makedirs(self.projectPath+"/api/")
+        
+        with open(self.projectPath+"/api/"+fileName+".csv", "w", encoding="utf-8") as file:
             file.write(products)
            
     def setTypesListbyParent(self, parentType):
@@ -181,7 +231,7 @@ class Load:
         
         #string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
 
-        string += "| "+name+" ("+str(count)+")](/api/"+filename+".json)       | [CSV](/api/"+filename+".csv) [RSS](/api/"+filename+".rss)  |\n"
+        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [JSON-LD](/api/"+filename+".json) [CSV](/api/"+filename+".csv) [RSS](/api/"+filename+".rss)  |\n"
         
         return string
     
