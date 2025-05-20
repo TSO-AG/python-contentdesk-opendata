@@ -52,8 +52,9 @@ class Transform:
         for category in categories:
             print("Category: ", category)
             if category in self.categories:
-                categoriesList[self.categories[category]['labels']['en_US']]
-                categoriesList[self.categories[category]['labels']['en_US']]['suiId'] = category
+                categoryKey = str(self.categories[category]['labels']['en_US'])
+                categoriesList[categoryKey] = {}
+                categoriesList[categoryKey]['suiId'] = category
                 
         print("Categories List: ", categoriesList)
         return categoriesList
