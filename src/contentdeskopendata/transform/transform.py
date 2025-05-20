@@ -15,6 +15,24 @@ class Transform:
     
         return jsonLD
     
+    def license(self, code):
+        if code == 'cc0':
+            return 'CC0'
+        elif code == 'ccby':
+            return 'CC BY'
+        elif code == 'ccbync':
+            return 'CC BY-NC'
+        elif code == 'ccbynd':
+            return 'CC BY-ND'
+        elif code == 'ccbysa':
+            return 'CC BY-SA'
+        elif code == 'ccbyncnd':
+            return 'CC BY-NC-ND'
+        elif code == 'ccbyncsa':
+            return 'CC BY-NC-SA'
+        else:
+            return None
+    
     def getTransformProducts(self):
         return self.transformProducts
     
@@ -38,7 +56,7 @@ class Transform:
         if 'description' in product["values"]:
             newProduct['description'] = self.languageToJSONLD(product["values"]['description'])
         if 'license' in product["values"]:
-            newProduct['license'] = product["values"]["license"][0]['data']
+            newProduct['license'] = self.license(product["values"]["license"][0]['data'])
         # Address
         if 'addressLocality' in product['values']:
             newProduct['address'] = self.setAddress(product)
