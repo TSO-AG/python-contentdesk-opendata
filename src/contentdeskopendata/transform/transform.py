@@ -48,13 +48,14 @@ class Transform:
             return []
         
     def getCategoriesbyList(self, categories):
-        categoriesList = []
+        categoriesList = {}
         for category in categories:
             print("Category: ", category)
             if category in self.categories:
-                categoryItem = self.categories[category]['labels']['en_US']
-                categoryItem['suiId'] = category
-                categoriesList.append(categoryItem)
+                categoriesList[self.categories[category]['labels']['en_US']]
+                categoriesList[self.categories[category]['labels']['en_US']]['suiId'] = category
+                
+        print("Categories List: ", categoriesList)
         return categoriesList
     
     def getTransformProducts(self):
