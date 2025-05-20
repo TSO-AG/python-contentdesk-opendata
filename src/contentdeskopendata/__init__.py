@@ -17,7 +17,7 @@ class ContentdeskOpenData:
         self.projectPath = projectPath
         self.extractProducts = Extraction(self.host, self.clientid, self.secret, self.user, self.passwd)
         self.debugExtractProducts()
-        self.transformProducts = Transform(self.extractProducts.getProducts(), self.cdnurl)
+        self.transformProducts = Transform(self.extractProducts.getProducts(), self.projectPath, self.cdnurl)
         self.debugTransformProducts()
         self.loadProducts = Load(self.transformProducts.getTransformProducts(), self.projectPath, organization, name, website, organization_website, region)
         self.debugLoadProducts()

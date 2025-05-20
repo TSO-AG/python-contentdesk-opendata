@@ -3,7 +3,8 @@ import os
 
 class Transform:
     
-    def __init__(self, extractProducts, cdnurl):
+    def __init__(self, extractProducts, projectPath, cdnurl):
+        self.projectPath = projectPath
         self.extractProducts = extractProducts
         self.cdnurl = cdnurl
         self.categories = self.loadCategories()
