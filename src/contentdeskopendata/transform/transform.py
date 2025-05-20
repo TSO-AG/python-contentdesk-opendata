@@ -1,10 +1,12 @@
 import json
+import os
 
 class Transform:
     
     def __init__(self, extractProducts, cdnurl):
         self.extractProducts = extractProducts
         self.cdnurl = cdnurl
+        self.categories = self.loadCategories()
         self.transformProducts = self.transformToJSONLD()
     
     def transformToJSONLD(self):
@@ -32,6 +34,27 @@ class Transform:
             return 'CC BY-NC-SA'
         else:
             return None
+        
+    def loadCategories(self):
+        category_file_path = os.path.join(self.projectPath, "category.json")
+        print("Category File Path: ", category_file_path)
+        if os.path.exists(category_file_path):
+            with open(category_file_path, "r") as file:
+                categories = json.load(file)
+            return categories
+        else:
+            print(f"File {category_file_path} does not exist.")
+            return []
+        
+    def getCategoriesbyList(self, categories):
+        categoriesList = []
+        for category in categories:
+            print("Category: ", category)
+            if category in self.categories:
+                categoryItem = self.categories[category]['labels']['en_US']
+                categoryItem['suiId'] = category
+                categoriesList.append(categoryItem)
+        return categoriesList
     
     def getTransformProducts(self):
         return self.transformProducts
@@ -45,7 +68,7 @@ class Transform:
         newProduct['@type'] = product["family"]
         newProduct['identifier'] = product["identifier"]
         if 'leisure' in product['values'] and product['values']['leisure']:
-            newProduct['category'] = product['values']['leisure'][0]['data'] 
+            newProduct['category'] = self.getCategoriesbyList(product['values']['leisure'][0]['data'])
         #newProduct['dateCreated'] = product['created']
         newProduct['dateModified'] = product['updated']
         # Generel
