@@ -272,7 +272,7 @@ class Load:
             file.write("---\n")
             file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
             file.write(str(self.countProducts)+ " freie Datensätze\n\n")
-            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.de), [CC BY](https://creativecommons.org/licenses/by/4.0/deed.de) und [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
             
             file.write("[Dokumnetation](documentation)\n\n")
 
