@@ -1,18 +1,19 @@
 from akeneo.akeneo import Akeneo
 
 class Extraction:
-    def __init__(self, host, clientid, secret, user, passwd):
+    def __init__(self, host, clientid, secret, user, passwd, license='["cc0","ccby","ccbync","ccbynd","ccbysa","ccbyncnd","ccbyncsa"]'):
         print("Extraction")
         self.host = host
         self.clientid = clientid
         self.secret = secret
         self.user = user
         self.passwd = passwd
+        self.license = license
         self.produccts = self.getProductsfromTarget()
         
     def getProductsfromTarget(self):
         target = Akeneo(self.host, self.clientid, self.secret, self.user, self.passwd)
-        search = '{"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"enabled":[{"operator":"=","value":true}],"license":[{"operator":"IN","value":["cc0","ccby","ccbync","ccbynd","ccbysa","ccbyncnd","ccbyncsa"]}]}'
+        search = '{"completeness":[{"operator":"=","value":100,"scope":"ecommerce"}],"enabled":[{"operator":"=","value":true}],"license":[{"operator":"IN","value":'+self.license+'}]}'
         products = target.getProducts(search)
         return products
     
