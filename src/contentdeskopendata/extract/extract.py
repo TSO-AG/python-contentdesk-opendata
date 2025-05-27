@@ -1,7 +1,7 @@
 from akeneo.akeneo import Akeneo
 
 class Extraction:
-    def __init__(self, host, clientid, secret, user, passwd, license='["cc0","ccby","ccbync","ccbynd","ccbysa","ccbyncnd","ccbyncsa"]'):
+    def __init__(self, host, clientid, secret, user, passwd, license='["cc0","ccby","ccbysa"]'):
         print("Extraction")
         self.host = host
         self.clientid = clientid
