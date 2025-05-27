@@ -281,9 +281,9 @@ class Load:
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
-            file.write("## Lizenz\n")
-            file.write(self.splitStringtoList(self.license))
-            file.write("\n\n")
+            #file.write("## Lizenz\n")
+            #file.write(self.splitStringtoList(self.license))
+            #file.write("\n\n")
             file.write("## Datensätze\n")
             
             file.write("| Daten      | Format                          |\n")
