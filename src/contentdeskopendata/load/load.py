@@ -4,13 +4,14 @@ from datetime import datetime
 
 class Load:
     
-    def __init__(self, transformProducts, projectPath, organization, name, website, organization_website, region):
+    def __init__(self, transformProducts, projectPath, organization, name, website, organization_website, region, license):
         self.projectPath = projectPath
         self.organization = organization
         self.name = name
         self.website = website
         self.organization_website = organization_website
         self.region = region
+        self.license = license
         self.transformProducts = transformProducts
         self.countProducts = len(self.transformProducts)
         self.typesClass = self.loadAllTypes()
@@ -250,6 +251,16 @@ class Load:
                     print(f"{fileName} is not a list.")
                     return 0
     
+    def splitStringtoList(self, string):
+        newstring = ''
+        # Split the string by commas and strip whitespace
+        items = [item.strip() for item in string.split(',') if item.strip()]
+        for item in items:
+            if item:
+                newstring += '* '+item + '\n'
+        return newstring
+            
+    
     def createMarkDownFileIndex(self):
         # create a markdown file with the name "data.md" in the projectPath
         markdown_file_path = os.path.join(self.projectPath, "index.md")
@@ -262,11 +273,17 @@ class Load:
             file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
             file.write(str(self.countProducts)+ " freie Datensätze\n\n")
             file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            
             file.write("[Dokumnetation](documentation)\n\n")
+
+            
             file.write("**Die Daten dürfen**\n\n")
             file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
             file.write("**Haftungsausschluss**\n\n")
             file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
+            file.write("## Lizenz\n")
+            file.write(self.splitStringtoList(self.license))
+            file.write("\n\n")
             file.write("## Datensätze\n")
             
             file.write("| Daten      | Format                          |\n")

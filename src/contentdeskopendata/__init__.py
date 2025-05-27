@@ -6,7 +6,7 @@ class ContentdeskOpenData:
     """
     ContentdeskOpenData class to extract data from a given target and generate a markdown file.
     """
-    def __init__(self, host, clientid, secret, user, passwd, cdnurl, projectPath, organization, name, website, organization_website, region, license='["cc0","ccby","ccbysa"]'):
+    def __init__(self, host, clientid, secret, user, passwd, cdnurl, projectPath, organization, name, website, organization_website, region, license):
         print("INIT - ContentdeskOpenData")
         self.host = host
         self.clientid = clientid
@@ -20,7 +20,7 @@ class ContentdeskOpenData:
         self.debugExtractProducts()
         self.transformProducts = Transform(self.extractProducts.getProducts(), self.projectPath, self.cdnurl)
         self.debugTransformProducts()
-        self.loadProducts = Load(self.transformProducts.getTransformProducts(), self.projectPath, organization, name, website, organization_website, region)
+        self.loadProducts = Load(self.transformProducts.getTransformProducts(), self.projectPath, organization, name, website, organization_website, region, self.license)
         self.debugLoadProducts()
     
     def getExtractProducts(self):
