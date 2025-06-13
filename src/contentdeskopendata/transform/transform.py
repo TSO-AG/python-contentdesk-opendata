@@ -98,10 +98,14 @@ class Transform:
         if 'image' in product['values']:
             # TODO: Image Group / Array with Gallery-Images
             newProduct['image'] = []
-            newProduct['image'].append({
-                "@type": "ImageObject",
-                "contentUrl": self.cdnurl + product['values']['image'][0]['data']
-            })
+            newImage = {}
+            newImage['@type'] = 'ImageObject'
+            newImage['contentUrl'] = self.cdnurl + product['values']['image'][0]['data']
+            if 'image_description' in product['values']:
+                newImage['caption'] = self.languageToJSONLD(product['values']['image_description'])
+            newProduct['image'].append({newImage})
+        
+        # TODO: Photos
             
         if 'copyrightHolder' in product['values']:
             newProduct['copyrightHolder'] = product['values']['copyrightHolder'][0]['data']
