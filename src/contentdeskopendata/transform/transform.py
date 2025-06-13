@@ -103,7 +103,7 @@ class Transform:
             newImage['contentUrl'] = self.cdnurl + product['values']['image'][0]['data']
             if 'image_description' in product['values']:
                 newImage['caption'] = self.languageToJSONLD(product['values']['image_description'])
-            newProduct['image'].append({newImage})
+            newProduct['image'].append(newImage)
         
         # TODO: Photos
             
