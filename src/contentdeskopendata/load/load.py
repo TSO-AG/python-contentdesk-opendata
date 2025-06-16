@@ -338,7 +338,7 @@ class Load:
             # if self.checkLengthinFile("MediaObject") > 0:
             #    dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
-            
+            file.write("\n\n")
             file.write("### Haftungsausschluss\n\n")
             file.write("* "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Es wird keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten übernommen.\n\n")
             
@@ -346,7 +346,7 @@ class Load:
             file.write("Weitere Informationen sind in der Entwicklerdokumentation zu finden:\n\n")
             file.write("* [📒 Dokumentation](documentation)\n\n")
             file.write("Wenn Sie unsicher sind, wie Sie die Daten nutzen können oder weitere Informationen wünschen, melden Sie sich gerne bei uns:\n\n")
-            file.write("* 📧 [E-Mail](mailto:"+self.email+")\n")
+            file.write("* 📧 [E-Mail](mailto:"+str(self.email)+")\n")
             
         print(f"Markdown file created at: {markdown_file_path}")
         
