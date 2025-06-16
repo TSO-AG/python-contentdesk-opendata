@@ -279,7 +279,7 @@ class Load:
             file.write("„Open Data“ bedeutet: Daten, die frei zugänglich, kostenlos nutzbar und von jedem weiterverwendet werden dürfen – ganz ohne komplizierte Bedingungen.\n\n")
             file.write("## Wozu dient dieses Portal?\n")
             
-            file.write("Dieses Portal richtet sich an:\n")
+            file.write("Dieses Portal richtet sich an:\n\n")
             file.write(" * **Reiseveranstalter, Hotels und Touristiker**, die aktuelle Informationen zu Veranstaltungen, Ausflugszielen oder Unterkünften suchen,\n")
             file.write(" * **Medien, Entwickler oder Startups**, die auf Basis der Daten neue Anwendungen oder Angebote entwickeln möchten,\n")
             file.write(" * **interessierte Bürgerinnen und Bürger**, die einen Einblick in die touristische Vielfalt der Region erhalten möchten.\n\n")
@@ -295,9 +295,9 @@ class Load:
             
             file.write("## Wie kann ich die Daten nutzen?\n\n")
             file.write("* Wenn Sie möchten, können Sie die Daten herunterladen.\n")
-            file.write("* Sie dürfen die Daten in eigene Projekte, Websites oder Broschüren einbauen - die Daten dürfen:\n")
-            file.write("✅ vervielfältigt, verbreitet und öffentlich zugänglich gemacht werden\n")
-            file.write("✅ angereichert und bearbeitet werden\n")
+            file.write("* Sie dürfen die Daten in eigene Projekte, Websites oder Broschüren einbauen - die Daten dürfen:\n\n")
+            file.write("✅ vervielfältigt, verbreitet und öffentlich zugänglich gemacht werden\n\n")
+            file.write("✅ angereichert und bearbeitet werden\n\n")
             file.write("✅ kommerziell genutzt werden\n\n")
 
             #file.write("## Lizenz\n")
@@ -339,7 +339,7 @@ class Load:
             #    dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
             
-            file.write("**Haftungsausschluss**\n\n")
+            file.write("### Haftungsausschluss**\n\n")
             file.write("* "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Es wird keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten übernommen.\n\n")
             
             file.write("## Noch Fragen?\n\n")
