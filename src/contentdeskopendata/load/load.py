@@ -346,7 +346,7 @@ class Load:
             file.write("Weitere Informationen sind in der Entwicklerdokumentation zu finden:\n\n")
             file.write("* [📒 Dokumentation](documentation)\n\n")
             file.write("Wenn Sie unsicher sind, wie Sie die Daten nutzen können oder weitere Informationen wünschen, melden Sie sich gerne bei uns:\n\n")
-            file.write("* 📧 [E-Mail](mailto:"+self.organization_website+")\n")
+            file.write("* 📧 [E-Mail](mailto:"+self.email+")\n")
             
         print(f"Markdown file created at: {markdown_file_path}")
         
