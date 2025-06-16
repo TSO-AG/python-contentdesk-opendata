@@ -339,7 +339,7 @@ class Load:
             #    dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
             file.write("\n\n")
-            file.write("## Haftungsausschluss\n\n")
+            file.write("### Haftungsausschluss\n\n")
             file.write("* "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Es wird keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten übernommen.\n\n")
             
             file.write("## Noch Fragen?\n\n")
