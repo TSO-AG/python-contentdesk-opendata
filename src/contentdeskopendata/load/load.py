@@ -4,12 +4,13 @@ from datetime import datetime
 
 class Load:
     
-    def __init__(self, transformProducts, projectPath, organization, name, website, organization_website, region, license):
+    def __init__(self, transformProducts, projectPath, organization, name, website, organization_website, email, region, license):
         self.projectPath = projectPath
         self.organization = organization
         self.name = name
         self.website = website
         self.organization_website = organization_website
+        self.email = email
         self.region = region
         self.license = license
         self.transformProducts = transformProducts
@@ -270,25 +271,43 @@ class Load:
             file.write("  - navigation\n")
             file.write("  - toc\n")
             file.write("---\n")
-            file.write("# Willkommen auf dem OpenData Portal der "+self.organization+"\n\n")
-            file.write(str(self.countProducts)+ " freie Datensätze\n\n")
-            file.write("Hier finden Sie öffentlich zugängliche Datensätze aus der "+self.region+" wie Unterkünfte, Erlebnisse und Gastronomie. Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.de), [CC BY](https://creativecommons.org/licenses/by/4.0/deed.de) oder [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden.\n\n")
+            file.write("# Willkommen auf dem OpenData Portal von "+self.organization+"\n\n")
+            #file.write(str(self.countProducts)+ " freie Datensätze\n\n")
+            file.write("Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden. \n\n")
+            #file.write("[Dokumentation](documentation)\n\n")
+            file.write("## Was ist Open Data?\n\n")
+            file.write("„Open Data“ bedeutet: Daten, die frei zugänglich, kostenlos nutzbar und von jedem weiterverwendet werden dürfen – ganz ohne komplizierte Bedingungen.\n\n")
+            file.write("## Wozu dient dieses Portal?\n")
             
-            file.write("[Dokumnetation](documentation)\n\n")
+            file.write("Dieses Portal richtet sich an:\n")
+            file.write(" * **Reiseveranstalter, Hotels und Touristiker**, die aktuelle Informationen zu Veranstaltungen, Ausflugszielen oder Unterkünften suchen,\n")
+            file.write(" * **Medien, Entwickler oder Startups**, die auf Basis der Daten neue Anwendungen oder Angebote entwickeln möchten,\n")
+            file.write(" * **interessierte Bürgerinnen und Bürger**, die einen Einblick in die touristische Vielfalt der Region erhalten möchten.\n\n")
+         
+            file.write("## Was finde ich hier?\n\n")
+            file.write("Sie finden unter anderem Daten zu:\n\n")
+            file.write("* 📍 **Punkten**, wie Unterkünfte, Restaurants oder Ausflugsziele\n")
+            file.write("* 🗺️ **Linien**, wie Routen und Touren\n")
+            file.write("* 📅 **Events**, wie Messen, Sportveranstaltungen, uvm.\n")
+            file.write("* 📰 **Artikel**, wie News, Produkte o.ä.\n")
+            file.write("* 📷 **Medien**, wie Webcams, Bilder, Videos o.ä.\n")
+            file.write("Diese Daten stammen direkt von unseren touristischen Partnern und werden regelmässig aktualisiert.\n\n")
+            
+            file.write("## Wie kann ich die Daten nutzen?\n\n")
+            file.write("* Wenn Sie möchten, können Sie die Daten herunterladen.\n")
+            file.write("* Sie dürfen die Daten in eigene Projekte, Websites oder Broschüren einbauen - die Daten dürfen:\n")
+            file.write("✅ vervielfältigt, verbreitet und öffentlich zugänglich gemacht werden\n")
+            file.write("✅ angereichert und bearbeitet werden\n")
+            file.write("✅ kommerziell genutzt werden\n\n")
 
-            
-            file.write("**Die Daten dürfen**\n\n")
-            file.write("- vervielfältigt, verbreitet und weiter zugänglich gemacht werden\n- angereichert und bearbeitet werden\n- kommerziell genutzt werden\n\n")
-            file.write("**Haftungsausschluss**\n\n")
-            file.write("- Die "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Sie übernimmt keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten.\n\n")
             #file.write("## Lizenz\n")
             #file.write(self.splitStringtoList(self.license))
             #file.write("\n\n")
-            file.write("## Datensätze\n")
-            
-            file.write("| Daten      | Format                          |\n")
-            file.write("| ----------- | ------------------------------------ |\n")
-            
+            file.write("## "+str(self.countProducts)+" freie Datensätze\n")
+
+            file.write("| Daten      | Format                           | Ansehen\n")
+            file.write("| ----------- | --------------------------------| ----------- |\n")
+
             dataset = self.createMarkDownString("Alle Produkte", "products", self.checkLengthinFile("products"))
             if self.checkLengthinFile("Place") > 0:
                 dataset += self.createMarkDownString("Orte", "Place", self.checkLengthinFile("Place"))
@@ -319,6 +338,15 @@ class Load:
             # if self.checkLengthinFile("MediaObject") > 0:
             #    dataset += self.createMarkDownString("Medienobjekt", "MediaObject", self.checkLengthinFile("MediaObject"))
             file.write(dataset)
+            
+            file.write("**Haftungsausschluss**\n\n")
+            file.write("* "+self.organization+" schliesst jede Haftung für direkte und indirekte Schäden durch die Datennutzung aus. Es wird keine Garantie für die Aktualität, Richtigkeit, Vollständigkeit und Genauigkeit der veröffentlichten Daten übernommen.\n\n")
+            
+            file.write("## Noch Fragen?\n\n")
+            file.write("Weitere Informationen sind in der Entwicklerdokumentation zu finden:\n\n")
+            file.write("* [📒 Dokumentation](documentation)\n\n")
+            file.write("Wenn Sie unsicher sind, wie Sie die Daten nutzen können oder weitere Informationen wünschen, melden Sie sich gerne bei uns:\n\n")
+            file.write("* 📧 [E-Mail](mailto:"+self.organization_website+")\n")
             
         print(f"Markdown file created at: {markdown_file_path}")
         
