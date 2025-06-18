@@ -357,7 +357,7 @@ class Load:
             file.write("---\n")
             file.write("hide:\n")
             file.write("  - navigation\n")
-            file.write("  - toc\n")
+            #file.write("  - toc\n")
             file.write("---\n\n")
             file.write("# Documentation\n\n")
             
@@ -402,7 +402,7 @@ class Load:
             
             file.write("### Change for description field\n\n")
             file.write("The description field got an upgrade to a full wysiwyg field with the following allowed tags: &lt;em&gt;&lt;strong&gt;&lt;code&gt;&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;&lt;h2&gt;&lt;h3&gt;&lt;h4&gt;&lt;h5&gt;&lt;h6&gt;&lt;img&gt;&lt;h1&gt;&lt;pre&gt;&lt;p&gt;&lt;a&gt;&lt;table&gt;&lt;caption&gt;&lt;/caption&gt;&lt;tbody&gt;&lt;thead&gt;&lt;tfoot&gt;&lt;th&gt;&lt;td&gt;&lt;tr&gt;&lt;br&gt;.\n\n")
-            file.write("In Open Data V1 there were just <p> tags allowed.\n\n")
+            file.write("In Open Data V1 there were just &lt;p&gt; tags allowed.\n\n")
 
             file.write("### More possible values in the @type field\n\n")
             file.write("The @type field can now have more values than just LodgingBusiness and Place. The full list of possible values is:\n\n")
