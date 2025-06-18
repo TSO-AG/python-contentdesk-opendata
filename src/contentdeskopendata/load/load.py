@@ -384,11 +384,12 @@ class Load:
             file.write("## Translations\n\n")
             file.write("Some of the fields support translations. For those fields, the returned value is actually an object containing the language codes as properties and the actual field, translated in that language, as value. The fields which do not support translations will just return their value directly. As an example in the above snippet, the openingDays field does not support translations, while the name supports it.\n\n")
             
-            file.write("## Schema.org integration\n\n")
+            file.write("## Schema.org and discover.swiss integration\n\n")
             file.write("Some of the returned fields in the objects are also schema.org standard. The @type attribute of the objects identifies the schema.org type, and can have the following values:\n\n")
             file.write("* LodgingBusiness for accommodations [https://schema.org/LodgingBusiness](https://schema.org/LodgingBusiness).\n")
             file.write("* Place for places [https://schema.org/Place](https://schema.org/Place).\n")
             file.write("* LocalBusiness for restaurants / cafes [https://schema.org/LocalBusiness](https://schema.org/LocalBusiness).\n\n")
+            file.write("Full Types list can be found at [Types](https://docs.discover.swiss/dev/concepts/content-organization/types-and-additionaltypes/).\n\n")
             
             file.write("## Non-standard fields\n\n")
             file.write("There are, however, a few custom fields which are not schema.org standard. The full list of non-standard fields, per each object type, can be seen below.\n\n")
