@@ -399,7 +399,6 @@ class Load:
             file.write("* discoverSwissId: the Discover Swiss ID of the object.\n")
             
             file.write("## Change log\n\n")
-            file.write("The change log of the API is available at [/CHANGELOG](/CHANGELOG).\n\n")
             
             file.write("### Change for description field\n\n")
             file.write("The description field got an upgrade to a full wysiwyg field with the following allowed tags: &lt;em&gt;&lt;strong&gt;&lt;code&gt;&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;&lt;h2&gt;&lt;h3&gt;&lt;h4&gt;&lt;h5&gt;&lt;h6&gt;&lt;img&gt;&lt;h1&gt;&lt;pre&gt;&lt;p&gt;&lt;a&gt;&lt;table&gt;&lt;caption&gt;&lt;/caption&gt;&lt;tbody&gt;&lt;thead&gt;&lt;tfoot&gt;&lt;th&gt;&lt;td&gt;&lt;tr&gt;&lt;br&gt;.\n")
