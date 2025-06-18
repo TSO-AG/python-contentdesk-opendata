@@ -406,7 +406,7 @@ class Load:
 
             file.write("### More possible values in the @type field\n\n")
             file.write("The @type field can now have more values than just LodgingBusiness and Place. The full list of possible values is:\n\n")
-            file.write(" [Types](https://docs.discover.swiss/dev/concepts/content-organization/types-and-additionaltypes/) of discover.swiss")
+            file.write(" [Types](https://docs.discover.swiss/dev/concepts/content-organization/types-and-additionaltypes/) of discover.swiss\n\n")
 
             file.write("### More possible properties \n\n")
             file.write("The following properties are now available in the API:\n\n")
