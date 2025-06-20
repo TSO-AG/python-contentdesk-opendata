@@ -412,7 +412,6 @@ class Load:
 
             file.write("### More possible properties \n\n")
             file.write("The following properties are now available in the API:\n\n")
-            file.write("* [image](https://schema.org/image)\n")
             file.write("* [priceRange](https://schema.org/priceRange)\n")
             file.write("* [starRating](https://schema.org/starRating)\n")
             file.write("* [openingHoursSpecification](https://schema.org/openingHoursSpecification)\n")
