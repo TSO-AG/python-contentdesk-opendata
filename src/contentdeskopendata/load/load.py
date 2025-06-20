@@ -345,6 +345,7 @@ class Load:
             file.write("## Noch Fragen?\n\n")
             file.write("Weitere Informationen sind in der Entwicklerdokumentation zu finden:\n\n")
             file.write("* [📒 Dokumentation](documentation)\n\n")
+            file.write("* [📄 Changelog ](documentation/#change-log)\n\n")
             file.write("Wenn Sie unsicher sind, wie Sie die Daten nutzen können oder weitere Informationen wünschen, melden Sie sich gerne bei uns:\n\n")
             file.write("* 📧 [E-Mail](mailto:"+str(self.email)+")\n")
             
@@ -398,7 +399,7 @@ class Load:
             file.write("* google_place_id: the Google Place ID of the object.\n")
             file.write("* discoverSwissId: the Discover Swiss ID of the object.\n")
             
-            file.write("## Change log\n\n")
+            file.write("## Change log - Version 2.0\n\n")
             
             file.write("### Change for description field\n\n")
             file.write("The description field got an upgrade to a full wysiwyg field with the following allowed tags: &lt;em&gt;&lt;strong&gt;&lt;code&gt;&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;&lt;h2&gt;&lt;h3&gt;&lt;h4&gt;&lt;h5&gt;&lt;h6&gt;&lt;img&gt;&lt;h1&gt;&lt;pre&gt;&lt;p&gt;&lt;a&gt;&lt;table&gt;&lt;caption&gt;&lt;/caption&gt;&lt;tbody&gt;&lt;thead&gt;&lt;tfoot&gt;&lt;th&gt;&lt;td&gt;&lt;tr&gt;&lt;br&gt;.\n\n")
