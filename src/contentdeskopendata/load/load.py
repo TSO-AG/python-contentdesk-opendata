@@ -19,6 +19,7 @@ class Load:
         self.loadProducts = self.setLoadProducts()
         self.createMarkDownFileIndex()
         self.createMarkDownFileDocumentation()
+        self.createMarkDownFileChangelog()
         self.copyFileCategory()
                
     def getLoadProducts(self):
@@ -271,7 +272,7 @@ class Load:
             file.write("  - navigation\n")
             file.write("  - toc\n")
             file.write("---\n")
-            file.write("# Willkommen auf dem OpenData Portal von "+self.organization+"\n\n")
+            file.write("# OpenData Portal - "+self.organization+"\n\n")
             #file.write(str(self.countProducts)+ " freie Datensätze\n\n")
             file.write("Die hier veröffentlichten Daten stehen kostenlos zur Verfügung und können mit einer [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/deed.de) Lizenz frei wiederverwendet werden. \n\n")
             #file.write("[Dokumentation](documentation)\n\n")
@@ -311,8 +312,8 @@ class Load:
             dataset = self.createMarkDownString("Alle Produkte", "products", self.checkLengthinFile("products"))
             if self.checkLengthinFile("Place") > 0:
                 dataset += self.createMarkDownString("Orte", "Place", self.checkLengthinFile("Place"))
-            if self.checkLengthinFile("Accommodation") > 0:
-                dataset += self.createMarkDownString("Unterkünfte", "Accommodation", self.checkLengthinFile("Accommodation"))
+            #if self.checkLengthinFile("Accommodation") > 0:
+            #    dataset += self.createMarkDownString("Unterkünfte", "Accommodation", self.checkLengthinFile("Accommodation"))
             if self.checkLengthinFile("CivicStructure") > 0:
                 dataset += self.createMarkDownString("Öffentliche Anlage/Einrichtung", "CivicStructure", self.checkLengthinFile("CivicStructure"))
             if self.checkLengthinFile("AdministrativeArea") > 0:
@@ -331,8 +332,8 @@ class Load:
                 dataset += self.createMarkDownString("Webcam", "Webcam", self.checkLengthinFile("Webcam"))
             if self.checkLengthinFile("Event") > 0:
                 dataset += self.createMarkDownString("Event", "Event", self.checkLengthinFile("Event"))
-            if self.checkLengthinFile("Product") > 0:
-                dataset += self.createMarkDownString("Produkte", "Product", self.checkLengthinFile("Product"))
+            # if self.checkLengthinFile("Product") > 0:
+            #    dataset += self.createMarkDownString("Produkte", "Product", self.checkLengthinFile("Product"))
             # if self.checkLengthinFile("CreativeWork") > 0:
             #    dataset += self.createMarkDownString("Kreative Arbeit", "CreativeWork", self.checkLengthinFile("CreativeWork"))
             # if self.checkLengthinFile("MediaObject") > 0:
@@ -345,7 +346,7 @@ class Load:
             file.write("## Noch Fragen?\n\n")
             file.write("Weitere Informationen sind in der Entwicklerdokumentation zu finden:\n\n")
             file.write("* [📒 Dokumentation](documentation)\n\n")
-            file.write("* [📄 Changelog ](documentation/#change-log)\n\n")
+            file.write("* [📄 Changelog ](changelog)\n\n")
             file.write("Wenn Sie unsicher sind, wie Sie die Daten nutzen können oder weitere Informationen wünschen, melden Sie sich gerne bei uns:\n\n")
             file.write("* 📧 [E-Mail](mailto:"+str(self.email)+")\n")
             
@@ -400,32 +401,7 @@ class Load:
             file.write("* discoverSwissId: the Discover Swiss ID of the object.\n")
             
             file.write("## Change log\n\n")
-            file.write("Version 2.0\n\n")
-
-            file.write("### Change for description field\n\n")
-            file.write("The description field got an upgrade to a full wysiwyg field with the following allowed tags: &lt;em&gt;&lt;strong&gt;&lt;code&gt;&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;&lt;h2&gt;&lt;h3&gt;&lt;h4&gt;&lt;h5&gt;&lt;h6&gt;&lt;img&gt;&lt;h1&gt;&lt;pre&gt;&lt;p&gt;&lt;a&gt;&lt;table&gt;&lt;caption&gt;&lt;/caption&gt;&lt;tbody&gt;&lt;thead&gt;&lt;tfoot&gt;&lt;th&gt;&lt;td&gt;&lt;tr&gt;&lt;br&gt;.\n\n")
-            file.write("In Open Data V1 there were just &lt;p&gt; tags allowed.\n\n")
-
-            file.write("### More possible values in the @type field\n\n")
-            file.write("The @type field can now have more values than just LodgingBusiness and Place. The full list of possible values is:\n\n")
-            file.write(" [Types](https://docs.discover.swiss/dev/concepts/content-organization/types-and-additionaltypes/) of discover.swiss\n\n")
-
-            file.write("### More possible properties \n\n")
-            file.write("The following properties are now available in the API:\n\n")
-            file.write("* [priceRange](https://schema.org/priceRange)\n")
-            file.write("* [starRating](https://schema.org/starRating)\n")
-            file.write("* [openingHoursSpecification](https://schema.org/openingHoursSpecification)\n")
-            file.write("* [openingHours](https://schema.org/openingHours)\n")
-            file.write("* [amenityFeature](https://schema.org/amenityFeature)\n")
-            file.write("* [award](https://schema.org/award)\n")
-            file.write("* [offers](https://schema.org/offers)\n")
-            file.write("* [paymentAccepted](https://schema.org/paymentAccepted)\n")
-            file.write("* [currenciesAccepted](https://schema.org/currenciesAccepted)\n")
-            file.write("* [checkinTime](https://schema.org/checkinTime)\n")
-            file.write("* [checkoutTime](https://schema.org/checkoutTime)\n")
-            file.write("* [petsAllowed](https://schema.org/petsAllowed)\n")
-            file.write("* [numberOfRooms](https://schema.org/numberOfRooms)\n")
-            file.write("* [maximumAttendeeCapacity](https://schema.org/maximumAttendeeCapacity)\n")
+            file.write("* [Version 2.0 ](changelog)\n\n")
 
             file.write("## License\n\n")
             file.write("The data published here is available free of charge and can be freely reused under a CC BY-SA license. The data may be:\n\n")
@@ -434,6 +410,45 @@ class Load:
             file.write("* Used commercially.\n")
         
         print(f"Markdown file created at: {markdown_file_path}")
+
+        def createMarkDownFileChangelog(self):
+            markdown_file_path = os.path.join(self.projectPath, "changelog.md")
+            with open(markdown_file_path, "w", encoding='utf-8') as file:
+                file.write("# Change log\n\n")
+                file.write("Version 2.0\n\n")
+
+                file.write("## Change for description field\n\n")
+                file.write("The description field got an upgrade to a full wysiwyg field with the following allowed tags: &lt;em&gt;&lt;strong&gt;&lt;code&gt;&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;&lt;h2&gt;&lt;h3&gt;&lt;h4&gt;&lt;h5&gt;&lt;h6&gt;&lt;img&gt;&lt;h1&gt;&lt;pre&gt;&lt;p&gt;&lt;a&gt;&lt;table&gt;&lt;caption&gt;&lt;/caption&gt;&lt;tbody&gt;&lt;thead&gt;&lt;tfoot&gt;&lt;th&gt;&lt;td&gt;&lt;tr&gt;&lt;br&gt;.\n\n")
+                file.write("In Open Data V1 there were just &lt;p&gt; tags allowed.\n\n")
+
+                file.write("## More possible values in the @type field\n\n")
+                file.write("The @type field can now have more values than just LodgingBusiness and Place. The full list of possible values is:\n\n")
+                file.write(" [Types](https://docs.discover.swiss/dev/concepts/content-organization/types-and-additionaltypes/) of discover.swiss\n\n")
+
+                file.write("## More possible properties \n\n")
+                file.write("The following properties are now available in the API:\n\n")
+                file.write("* [priceRange](https://schema.org/priceRange)\n")
+                file.write("* [starRating](https://schema.org/starRating)\n")
+                file.write("* [openingHoursSpecification](https://schema.org/openingHoursSpecification)\n")
+                file.write("* [openingHours](https://schema.org/openingHours)\n")
+                file.write("* [amenityFeature](https://schema.org/amenityFeature)\n")
+                file.write("* [award](https://schema.org/award)\n")
+                file.write("* [offers](https://schema.org/offers)\n")
+                file.write("* [paymentAccepted](https://schema.org/paymentAccepted)\n")
+                file.write("* [currenciesAccepted](https://schema.org/currenciesAccepted)\n")
+                file.write("* [checkinTime](https://schema.org/checkinTime)\n")
+                file.write("* [checkoutTime](https://schema.org/checkoutTime)\n")
+                file.write("* [petsAllowed](https://schema.org/petsAllowed)\n")
+                file.write("* [numberOfRooms](https://schema.org/numberOfRooms)\n")
+                file.write("* [maximumAttendeeCapacity](https://schema.org/maximumAttendeeCapacity)\n")
+                
+                file.write("### Image\n\n")
+                
+                file.write("## Categories\n\n")
+                
+
+        print(f"Markdown file created at: {markdown_file_path}")
+        
 
     def copyFileCategory(self):
         # copy the file category.json from the projectPath to the api folder
