@@ -414,6 +414,10 @@ class Load:
     def createMarkDownFileChangelog(self):
         markdown_file_path = os.path.join(self.projectPath, "changelog.md")
         with open(markdown_file_path, "w", encoding='utf-8') as file:
+            file.write("---\n")
+            file.write("hide:\n")
+            file.write("  - navigation\n")
+            #file.write("  - toc\n")
             file.write("# Change log\n\n")
             file.write("Version 2.0\n\n")
 
