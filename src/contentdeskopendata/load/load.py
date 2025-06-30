@@ -418,6 +418,7 @@ class Load:
             file.write("hide:\n")
             file.write("  - navigation\n")
             #file.write("  - toc\n")
+            file.write("---\n\n")
             file.write("# Change log\n\n")
             file.write("Version 2.0\n\n")
 
