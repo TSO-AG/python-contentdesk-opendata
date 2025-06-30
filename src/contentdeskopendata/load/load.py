@@ -372,7 +372,7 @@ class Load:
             file.write("The main endpoint of the API is located at [/api](/api). The API can be used to retrieve all the available categories, or to retrieve all the objects tagged with a specific category.\n\n")
             
             file.write("## Categories list\n\n")
-            file.write("By just calling the endpoint, [/api/category](/api/category.json), without any other parameters, the result is a list of all the available categories. The category items are stored as a hierarchical tree, so each of the category items has also a reference to its parent. If the parent is \"null\", then the category is a root item. An excerpt from the result list can be seen below:\n\n")
+            file.write("By just calling the endpoint, [/api/category.json](/api/category.json), without any other parameters, the result is a list of all the available categories. The category items are stored as a hierarchical tree, so each of the category items has also a reference to its parent. If the parent is \"null\", then the category is a root item. An excerpt from the result list can be seen below:\n\n")
             file.write("```json\n")
             file.write("{\"code\":\"sui_01\",\"parent\":\"sui_root\",\"labels\":{\"de_CH\":\"Aktivitäten\",\"en_US\":\"Activities\",\"fr_FR\":\"Activités\",\"it_IT\":\"Attività\"}}\n")
             file.write("```\n\n")
@@ -443,10 +443,11 @@ class Load:
                 file.write("* [maximumAttendeeCapacity](https://schema.org/maximumAttendeeCapacity)\n")
                 
                 file.write("### Image\n\n")
+                file.write("Image is now delivered with type ImageObject and the properties “caption”. \n\n")
                 
-                file.write("## Categories\n\n")
+                file.write("## Category\n\n")
+                file.write("The category is now delivered with the disocvers.wiss categories and their IDs. [/api/category.json](/api/category.json)")
                 
-
         print(f"Markdown file created at: {markdown_file_path}")
         
 
