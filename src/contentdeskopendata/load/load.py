@@ -158,7 +158,8 @@ class Load:
             else:
                 rssFeed += '<link>'+ self.organization_website +'</link>'
             if 'description' in product:
-                rssFeed += '<description>'+ str(product['description']['de']) +'</description>'
+                if 'de' in product['description']:
+                    rssFeed += '<description>'+ str(product['description']['de']) +'</description>'
             if 'image' in product:
                 rssFeed += '<enclosure length="" type="image/jpeg" url="'+ str(product['image'][0]['contentUrl']) +'" />'
             rssFeed += '<guid isPermaLink="false">'+ product['identifier'] +'</guid>'
