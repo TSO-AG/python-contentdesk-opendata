@@ -402,7 +402,7 @@ class Load:
             file.write("* discoverSwissId: the Discover Swiss ID of the object.\n")
             
             file.write("## Change log\n\n")
-            file.write("* [Version 2.0 ](./changelog)\n\n")
+            file.write("* [Version 2.0 ](/changelog)\n\n")
 
             file.write("## License\n\n")
             file.write("The data published here is available free of charge and can be freely reused under a CC BY-SA license. The data may be:\n\n")
