@@ -197,7 +197,7 @@ class Load:
             os.makedirs(self.projectPath+"/api/")
 
         with open(self.projectPath+"/api/"+fileName+".geojson", "w", encoding="utf-8") as file:
-            file.write(products)
+            file.write(json.dumps(products))
 
     def setTypesListbyParent(self, parentType):
         types = []
