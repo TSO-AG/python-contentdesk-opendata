@@ -5,18 +5,20 @@ class GeoJsonTransformer:
     def setGeoJsonData(self, product):
         geojson_feature = {
             "type": "Feature",
-            "properties": {
-                "identifier": product["identifier"],
-                "name": product["name"]['de'],
-                "description": product["description"]["de"],
-                "url": product['address']['url'],
-                "image": product['image'][0]['contentUrl'],
-                "openstreetmap_id": product['additionalProperty']['openstreetmap_id']
-            },
-            "geometry": {
+        }
+        
+        geojson_feature["properties"] = {}
+        geojson_feature["properties"]['identifier'] = product["identifier"]
+        geojson_feature["properties"]['name'] = product["name"]['de']
+        if 'description' in product and 'de' in product["description"]:
+            geojson_feature["properties"]['description'] = product["description"]["de"]
+        geojson_feature["properties"]['url'] = product['address']['url']
+        geojson_feature["properties"]['image'] = product['image'][0]['contentUrl']
+        geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
+
+        geojson_feature["geometry"] = {
                 "type": "Point",
                 "coordinates": [product['geo']['longitude'], product['geo']['latitude']]
-            },
         }
         return geojson_feature
 
