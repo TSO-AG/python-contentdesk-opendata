@@ -8,7 +8,6 @@ class GeoJsonTransformer:
         }
         
         geojson_feature["properties"] = {}
-        print(product['identifier'])
         if isinstance(product, dict) and "identifier" in product:
             geojson_feature["properties"]['identifier'] = product["identifier"]
         if 'name' in product and 'de' in product["name"]:
