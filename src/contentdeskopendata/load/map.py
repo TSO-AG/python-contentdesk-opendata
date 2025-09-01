@@ -9,11 +9,9 @@ class mapCreator:
 
     def createMap(self, output_path):
         # Copy the template file
-        map = os.path.join(self.projectPath, "/map/products.html")
         
-        if not os.path.exists(self.projectPath+"/map/"):
-            os.makedirs(self.projectPath+"/map/")
-
+        map = os.path.join(self.projectPath, "map/products.html")
+            
         shutil.copy(map, output_path)
 
         # Read the copied file and modify Title and geoJsonUrL
