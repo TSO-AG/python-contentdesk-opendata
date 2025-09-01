@@ -21,7 +21,7 @@ class GeoJsonTransformer:
         if 'additionalProperty' in product and 'openstreetmap_id' in product['additionalProperty']:
             geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
 
-        if 'geo' not in product or 'latitude' not in product['geo'] or 'longitude' not in product['geo']:
+        if 'geo' in product and 'latitude' in product['geo'] and 'longitude' in product['geo']:
             geojson_feature["geometry"] = {
                     "type": "Point",
                     "coordinates": [product['geo']['longitude'], product['geo']['latitude']]
