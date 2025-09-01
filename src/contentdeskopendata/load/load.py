@@ -105,7 +105,7 @@ class Load:
         self.createRSSFeed(rssProducts, fileName)
         self.createCSV(csvProducts, fileName)
         self.createGeoJson(geojsonProducts, fileName)
-        self.mapCreator = mapCreator("/api/"+fileName+".geojson", fileName).createMap(self.projectPath+"/map/"+fileName+".html")
+        self.mapCreator = mapCreator("/api/"+fileName+".geojson", fileName, self.projectPath).createMap(self.projectPath+"/map/"+fileName+".html")
 
     def generateCSV(self, products):
         csvProducts = ""
