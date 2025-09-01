@@ -16,10 +16,11 @@ class GeoJsonTransformer:
         geojson_feature["properties"]['image'] = product['image'][0]['contentUrl']
         geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
 
-        geojson_feature["geometry"] = {
-                "type": "Point",
-                "coordinates": [product['geo']['longitude'], product['geo']['latitude']]
-        }
+        if 'geo' not in product or 'latitude' not in product['geo'] or 'longitude' not in product['geo']:
+            geojson_feature["geometry"] = {
+                    "type": "Point",
+                    "coordinates": [product['geo']['longitude'], product['geo']['latitude']]
+            }
         return geojson_feature
 
     def setProductsToGeoJson(self):
