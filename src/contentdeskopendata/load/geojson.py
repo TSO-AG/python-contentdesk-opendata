@@ -9,7 +9,8 @@ class GeoJsonTransformer:
         
         geojson_feature["properties"] = {}
         geojson_feature["properties"]['identifier'] = product["identifier"]
-        geojson_feature["properties"]['name'] = product["name"]['de']
+        if 'name' in product and 'de' in product["name"]:
+            geojson_feature["properties"]['name'] = product["name"]['de']
         if 'description' in product and 'de' in product["description"]:
             geojson_feature["properties"]['description'] = product["description"]["de"]
         if 'address' in product:
@@ -17,7 +18,8 @@ class GeoJsonTransformer:
                 geojson_feature["properties"]['url'] = product['address']['url']
         if 'image' in product:
             geojson_feature["properties"]['image'] = product['image'][0]['contentUrl']
-        geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
+        if 'additionalProperty' in product and 'openstreetmap_id' in product['additionalProperty']:
+            geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
 
         if 'geo' not in product or 'latitude' not in product['geo'] or 'longitude' not in product['geo']:
             geojson_feature["geometry"] = {
