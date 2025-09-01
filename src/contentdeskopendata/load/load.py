@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 from contentdeskopendata.load.geojson import GeoJsonTransformer
+from contentdeskopendata.load.map import mapCreator
 
 class Load:
     
@@ -104,6 +105,7 @@ class Load:
         self.createRSSFeed(rssProducts, fileName)
         self.createCSV(csvProducts, fileName)
         self.createGeoJson(geojsonProducts, fileName)
+        self.mapCreator = mapCreator("/api/"+fileName+".geojson", fileName).createMap(self.projectPath+"/map/"+fileName+".html")
 
     def generateCSV(self, products):
         csvProducts = ""
@@ -247,7 +249,7 @@ class Load:
         
         #string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
 
-        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json){ .md-button } [:fontawesome-solid-file-csv:](/api/"+filename+".csv){ .md-button } [:simple-rss:](/api/"+filename+".rss){ .md-button }  |\n"
+        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json){ .md-button } [:fontawesome-solid-file-csv:](/api/"+filename+".csv){ .md-button } [:simple-rss:](/api/"+filename+".rss){ .md-button }  | [:material-map-marker:](/map/"+filename+".rss){ .md-button } |\n"
         
         return string
     
