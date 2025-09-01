@@ -1,6 +1,6 @@
 class GeoJsonTransformer:
-    def __init__(self, products):
-        self.products = products
+    def __init__(self):
+        pass
 
     def setGeoJsonData(self, product):
         geojson_feature = {
@@ -29,13 +29,14 @@ class GeoJsonTransformer:
             }
         return geojson_feature
 
-    def setProductsToGeoJson(self):
+    def setProductsToGeoJson(self, products):
         # Transform the GeoJSON data as needed
         geojson_data = {
             'type': 'FeatureCollection',
             'features': []
         }   
-        for product in self.products:
+        for product in products:
             geojson_feature = self.setGeoJsonData(product)
             geojson_data["features"].append(geojson_feature)
+            
         return geojson_data
