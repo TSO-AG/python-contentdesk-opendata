@@ -12,7 +12,9 @@ class GeoJsonTransformer:
         geojson_feature["properties"]['name'] = product["name"]['de']
         if 'description' in product and 'de' in product["description"]:
             geojson_feature["properties"]['description'] = product["description"]["de"]
-        geojson_feature["properties"]['url'] = product['address']['url']
+        if 'address' in product:
+            if 'url' in product['address']:
+                geojson_feature["properties"]['url'] = product['address']['url']
         geojson_feature["properties"]['image'] = product['image'][0]['contentUrl']
         geojson_feature["properties"]['openstreetmap_id'] = product['additionalProperty']['openstreetmap_id']
 
