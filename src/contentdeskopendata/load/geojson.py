@@ -8,7 +8,7 @@ class GeoJsonTransformer:
         }
         
         geojson_feature["properties"] = {}
-        geojson_feature["properties"]['identifier'] = product["identifier"]
+        geojson_feature["properties"]['identifier'] = str(product["identifier"])
         if 'name' in product and 'de' in product["name"]:
             geojson_feature["properties"]['name'] = product["name"]['de']
         if 'description' in product and 'de' in product["description"]:
