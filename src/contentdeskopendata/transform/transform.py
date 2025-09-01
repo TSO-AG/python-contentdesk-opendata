@@ -9,7 +9,7 @@ class Transform:
         self.cdnurl = cdnurl
         self.categories = self.loadCategories()
         self.transformProducts = self.transformToJSONLD()
-    
+
     def transformToJSONLD(self):
         jsonLD = []
         for product in self.extractProducts:

@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from contentdeskopendata.load.geojson import GeoJsonTransformer
 
 class Load:
     
@@ -98,10 +99,12 @@ class Load:
         
         rssProducts = self.generateRSSFeed(products, fileName, title)
         csvProducts = self.generateCSV(products)
-        
+        geojsonProducts = GeoJsonTransformer(products).setProductsToGeoJson()
+
         self.createRSSFeed(rssProducts, fileName)
         self.createCSV(csvProducts, fileName)
-    
+        self.createGeoJson(geojsonProducts, fileName)
+
     def generateCSV(self, products):
         csvProducts = ""
         csvProducts += "id;name;disambiguatingDescription;description;longitude;latitude;streetAddress;postalCode;addressLocality;telephone;email;url;image;dateModified"
@@ -186,7 +189,17 @@ class Load:
         
         with open(self.projectPath+"/api/"+fileName+".csv", "w", encoding="utf-8") as file:
             file.write(products)
-           
+    
+    def createGeoJson(self, products, fileName):
+        # Check if folder exists
+        print("Folder Path: ", self.projectPath+"/api/"+fileName+".geojson")
+        if not os.path.exists(self.projectPath+"/api/"):
+            os.makedirs(self.projectPath+"/api/")
+
+        geojson = GeoJsonTransformer(products, self.cdnurl).transform()
+        with open(self.projectPath+"/api/"+fileName+".geojson", "w", encoding="utf-8") as file:
+            file.write(geojson)
+
     def setTypesListbyParent(self, parentType):
         types = []
         for typeClass in self.typesClass:
