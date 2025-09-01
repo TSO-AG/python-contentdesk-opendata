@@ -2,9 +2,9 @@ import shutil
 import os
 
 class mapCreator:
-    def __init__(self, geojsonPath, title, projectPath):
+    def __init__(self, geojsonPath, name, projectPath):
         self.geojsonPath = geojsonPath
-        self.title = title
+        self.name = name
         self.projectPath = projectPath
 
     def createMap(self, output_path):
@@ -19,11 +19,11 @@ class mapCreator:
             content = f.read()
 
         # Replace the <title> tag content
-        content = content.replace('<title> Alle Produkte </title>', f'<title>{self.title}</title>')
+        content = content.replace('<title> Alle Produkte </title>', f'<title>{self.name}</title>')
         # Replace the geojson filename in the script tag
         content = content.replace(
             "var geojsonURL = '/api/products.geojson'",
-            f"var geojsonURL = '/api/{self.geojsonPath}'"
+            f"var geojsonURL = '/api/{self.name}.geojson'"
         )
 
         # Write the modified content back
