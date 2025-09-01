@@ -249,7 +249,7 @@ class Load:
         
         #string += "["+name+" ("+str(count)+")](/api/"+filename+".json)\n\n"
 
-        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json){ .md-button } [:fontawesome-solid-file-csv:](/api/"+filename+".csv){ .md-button } [:simple-rss:](/api/"+filename+".rss){ .md-button }  | [:material-map-marker:](/map/"+filename+".rss){ .md-button } |\n"
+        string += "| ["+name+" ("+str(count)+")](/api/"+filename+".json)       | [:material-code-json:](/api/"+filename+".json){ .md-button } [:fontawesome-solid-file-csv:](/api/"+filename+".csv){ .md-button } [:simple-rss:](/api/"+filename+".rss){ .md-button }  | [:material-map-marker:](/map/"+filename+".html){ .md-button } |\n"
         
         return string
     

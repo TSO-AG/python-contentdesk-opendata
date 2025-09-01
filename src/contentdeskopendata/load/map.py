@@ -8,7 +8,7 @@ class mapCreator:
 
     def createMap(self, output_path):
         # Copy the template file
-        shutil.copy(os.path.join(os.path.dirname(__file__), 'map.html'), output_path)
+        shutil.copy('/map/products.html', output_path)
 
         # Read the copied file and modify Title and geoJsonUrL
         with open(output_path, 'r', encoding='utf-8') as f:
