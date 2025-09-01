@@ -196,9 +196,8 @@ class Load:
         if not os.path.exists(self.projectPath+"/api/"):
             os.makedirs(self.projectPath+"/api/")
 
-        geojson = GeoJsonTransformer(products).setProductsToGeoJson()
         with open(self.projectPath+"/api/"+fileName+".geojson", "w", encoding="utf-8") as file:
-            file.write(geojson)
+            file.write(products)
 
     def setTypesListbyParent(self, parentType):
         types = []
