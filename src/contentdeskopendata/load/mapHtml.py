@@ -1,6 +1,6 @@
 
 class mapHtml:
-    def get_map_html(self):
+    def get_map_html():
         return """
 <!DOCTYPE html>
 <html lang="en">
