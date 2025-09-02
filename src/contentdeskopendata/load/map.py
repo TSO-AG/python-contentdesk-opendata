@@ -1,4 +1,4 @@
-import shutil
+import os
 from contentdeskopendata.load.mapHtml import mapHtml
 
 class mapCreator:
@@ -20,6 +20,9 @@ class mapCreator:
             "var geojsonURL = '/api/products.geojson'",
             f"var geojsonURL = '/api/{self.name}.geojson'"
         )
+        
+        if not os.path.exists(self.projectPath+"/map/"):
+            os.makedirs(self.projectPath+"/map/")
 
         # Write the modified content back
         with open(output_path, 'w', encoding='utf-8') as f:
