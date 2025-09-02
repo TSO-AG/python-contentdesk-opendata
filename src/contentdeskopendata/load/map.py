@@ -1,5 +1,5 @@
 import shutil
-import os
+import mapHtml
 
 class mapCreator:
     def __init__(self, geojsonPath, name, projectPath):
@@ -11,13 +11,10 @@ class mapCreator:
         # Copy the template file
         
         #map = os.path.join(self.projectPath, "map/products.html")
-        map = os.path.join(os.path.dirname(__file__), "map.html")
-            
-        shutil.copy(map, output_path)
+        map = mapHtml.mapHtml().get_map_html()
 
-        # Read the copied file and modify Title and geoJsonUrL
-        with open(output_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(map)
 
         # Replace the <title> tag content
         content = content.replace('<title> Alle Produkte </title>', f'<title>{self.name}</title>')
