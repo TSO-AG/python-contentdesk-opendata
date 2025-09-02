@@ -1,5 +1,5 @@
 import shutil
-import mapHtml
+from contentdeskopendata.load.mapHtml import mapHtml
 
 class mapCreator:
     def __init__(self, geojsonPath, name, projectPath):
@@ -11,7 +11,7 @@ class mapCreator:
         # Copy the template file
         
         #map = os.path.join(self.projectPath, "map/products.html")
-        map = mapHtml.mapHtml().get_map_html()
+        map = mapHtml.get_map_html()
 
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(map)
