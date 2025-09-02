@@ -106,8 +106,7 @@ class Load:
         self.createCSV(csvProducts, fileName)
         self.createGeoJson(geojsonProducts, fileName)
         
-        if fileName != "products":
-            self.mapCreator = mapCreator("/api/"+fileName+".geojson", fileName, self.projectPath).createMap(self.projectPath+"/map/"+fileName+".html")
+        self.mapCreator = mapCreator("/api/"+fileName+".geojson", fileName, self.projectPath).createMap(self.projectPath+"/map/"+fileName+".html")
 
     def generateCSV(self, products):
         csvProducts = ""
