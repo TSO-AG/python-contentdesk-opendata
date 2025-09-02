@@ -10,7 +10,8 @@ class mapCreator:
     def createMap(self, output_path):
         # Copy the template file
         
-        map = os.path.join(self.projectPath, "map/products.html")
+        #map = os.path.join(self.projectPath, "map/products.html")
+        map = os.path.join(os.path.dirname(__file__), "map.html")
             
         shutil.copy(map, output_path)
 
