@@ -38,6 +38,9 @@ class mapCreator:
         # Write the JavaScript content
         with open(self.projectPath+"/javascripts/L.Control.Sidebar.js", 'w', encoding='utf-8') as f:
             f.write(mapJsContent)
+            
+        if not os.path.exists(self.projectPath+"/stylesheets/"):
+            os.makedirs(self.projectPath+"/stylesheets/")
         
         with open(self.projectPath+"/stylesheets/L.Control.Sidebar.css", 'w', encoding='utf-8') as f:
             f.write(mapCssContent)
