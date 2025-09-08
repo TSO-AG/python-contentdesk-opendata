@@ -287,6 +287,7 @@ class Load:
             file.write("hide:\n")
             file.write("  - navigation\n")
             file.write("  - toc\n")
+            file.write("description: Hier finden Sie öffentlich zugängliche touristische Datensätze aus der Region "+self.organization+" wie Unterkünfte, Erlebnisse und Gastronomiebetriebe.\n")
             file.write("---\n")
             file.write("# OpenData Portal - "+self.organization+"\n\n")
             #file.write(str(self.countProducts)+ " freie Datensätze\n\n")
