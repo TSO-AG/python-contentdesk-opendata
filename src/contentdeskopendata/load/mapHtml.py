@@ -84,7 +84,7 @@ class mapHtml:
             const bounds = geojsonLayer.getBounds();
             
             if (bounds.isValid()) {
-                map.fitBounds(bounds, {
+                mymap.fitBounds(bounds, {
                     padding: [50, 50],          // Innenabstand zum Rand (Pixel)
                     maxZoom: 15,               // Obergrenze, damit nicht zu stark gezoomt wird
                     animate: true,
