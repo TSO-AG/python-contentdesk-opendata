@@ -66,7 +66,7 @@ class mapHtml:
             const json = await load_shapefile();
             //L.geoJson(json).addTo(mymap);
             // Popup
-            L.geoJSON(json, {
+            const geojsonLayer = L.geoJSON(json, {
                 onEachFeature: function (feature, layer) {
                     layer.bindPopup('<h1>'+feature.properties.name+'</h1><img src="'+feature.properties.image+'" width="100%" /><p><a href="'+feature.properties.url+'">Webseite</a>');
                     //layer.bindTooltip('<h1>'+feature.properties.name+'</h1><img src="'+feature.properties.image+'" width="100%" /><p><a href="'+feature.properties.url+'">Webseite</a>');
@@ -81,6 +81,18 @@ class mapHtml:
                     }
                 }).addTo(mymap);
             */
+            const bounds = geojsonLayer.getBounds();
+            
+            if (bounds.isValid()) {
+                map.fitBounds(bounds, {
+                    padding: [50, 50],          // Innenabstand zum Rand (Pixel)
+                    maxZoom: 15,               // Obergrenze, damit nicht zu stark gezoomt wird
+                    animate: true,
+                    duration: 0.8              // Animationsdauer in Sekunden
+                });
+            } else {
+                console.warn('GeoJSON enthält keine gültigen Geometrien.');
+            }
         }
 
         var sidebar = L.control.sidebar('sidebar', {
