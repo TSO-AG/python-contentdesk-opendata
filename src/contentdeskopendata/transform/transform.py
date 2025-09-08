@@ -7,6 +7,7 @@ class Transform:
         self.projectPath = projectPath
         self.extractProducts = extractProducts
         self.cdnurl = cdnurl
+        self.typesClass = self.loadAllTypes()
         self.categories = self.loadCategories()
         self.transformProducts = self.transformToJSONLD()
 
@@ -15,7 +16,6 @@ class Transform:
         for product in self.extractProducts:
             newProduct = self.setProductJSONLD(product)
             jsonLD.append(newProduct)
-    
         return jsonLD
     
     def license(self, code):
@@ -65,10 +65,26 @@ class Transform:
     def getCdnUrl(self):
         return self.cdnurl
     
+    def loadAllTypes(self):
+        types_file_path = os.path.join(self.projectPath, "types.json")
+        print("Types File Path: ", types_file_path)
+        if os.path.exists(types_file_path):
+            with open(types_file_path, "r") as file:
+                types = json.load(file)
+            return types
+        else:
+            print(f"File {types_file_path} does not exist.")
+            return []
+
+    def getParentTypeByType(self, type):
+        parentType = next((t['parent'] for k, t in self.typesClass.items() if k == type), None)
+        return parentType
+    
     def setProductJSONLD(self, product):
         newProduct = {}
         newProduct['@context'] = "http://schema.org/"
         newProduct['@type'] = product["family"]
+        newProduct['additionalType'] = self.getParentTypeByType(product["family"])
         newProduct['identifier'] = product["identifier"]
         if 'leisure' in product['values'] and product['values']['leisure']:
             newProduct['category'] = self.getCategoriesbyList(product['values']['leisure'][0]['data'])
