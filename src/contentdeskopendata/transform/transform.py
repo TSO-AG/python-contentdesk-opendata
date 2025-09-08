@@ -84,7 +84,8 @@ class Transform:
         newProduct = {}
         newProduct['@context'] = "http://schema.org/"
         newProduct['@type'] = product["family"]
-        newProduct['additionalType'] = self.getParentTypeByType(product["family"])
+        if self.getParentTypeByType(product["family"]):
+            newProduct['additionalType'] = self.getParentTypeByType(product["family"])
         newProduct['identifier'] = product["identifier"]
         if 'leisure' in product['values'] and product['values']['leisure']:
             newProduct['category'] = self.getCategoriesbyList(product['values']['leisure'][0]['data'])
