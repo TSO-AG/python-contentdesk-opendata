@@ -147,7 +147,10 @@ class Transform:
             
         if 'amenityFeature' in product['values']:
             newProduct['amenityFeature'] = self.setAmenityFeature(product)
-            
+        
+        if 'servesCuisine' in product['values']:
+            newProduct['servesCuisine'] = self.setservesCuisine(product)
+        
         if 'award' in product['values']:
             newProduct['award'] = self.setAward(product)
             
@@ -260,6 +263,15 @@ class Transform:
             
         return amenityFeature
     
+    def setservesCuisine(self, product):
+        servesCuisine = []  
+        for cuisine in product['values']['servesCuisine'][0]['data']:
+            newCuisine = {}
+            # TODO: amenityFeature Label
+            newCuisine['name'] = cuisine
+            servesCuisine.append(newCuisine)
+        return servesCuisine
+
     def setAward(self, product):
         award = []
         for awardValue in product['values']['award'][0]['data']:
