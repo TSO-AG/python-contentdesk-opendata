@@ -281,7 +281,7 @@ class Load:
         return newstring
     
     def createOpenApiConf(self):
-        openapiConfig = OpenApiConf.getOpenApiConfig()
+        openapiConfig = OpenApiConf.getOpenApiConfig(self.organization, self.website)
         # create a openapi.json file in the projectPath
         openapi_file_path = os.path.join(self.projectPath, "openapi.json")
         with open(openapi_file_path, "w", encoding='utf-8') as file:

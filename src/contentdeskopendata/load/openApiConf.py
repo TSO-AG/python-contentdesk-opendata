@@ -1,9 +1,9 @@
 class OpenApiConf:
-    def getOpenApiConfig():
+    def getOpenApiConfig(name, url):
         return {
   "openapi": "3.0.3",
   "info": {
-    "title": "ContentDesk OpenData Demo API",
+    "title": name + " - OpenAPI",
     "description": "Eine OpenAPI‑Spezifikation für das öffentliche JSON‑Feed. Die zurückgelieferten Objekte orientieren sich am schema.org‑Typ.",
     "version": "1.0.0",
     "contact": {
@@ -14,8 +14,8 @@ class OpenApiConf:
   },
   "servers": [
     {
-      "url": "https://opendata.demo.contentdesk.io/api",
-      "description": "OpenData Demo ContentDesk"
+      "url": url + "/api",
+      "description": name + " - OpenAPI"
     }
   ],
   "paths": {
