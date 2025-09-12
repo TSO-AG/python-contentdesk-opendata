@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from contentdeskopendata.load.geojson import GeoJsonTransformer
 from contentdeskopendata.load.map import mapCreator
+from contentdeskopendata.load.openApiConf import OpenApiConf
 
 class Load:
     
@@ -22,6 +23,7 @@ class Load:
         self.createMarkDownFileIndex()
         self.createMarkDownFileDocumentation()
         self.createMarkDownFileChangelog()
+        self.createOpenApiConf()
         self.copyFileCategory()
                
     def getLoadProducts(self):
@@ -277,7 +279,14 @@ class Load:
             if item:
                 newstring += '* '+item + '\n'
         return newstring
-            
+    
+    def createOpenApiConf(self):
+        openapiConfig = OpenApiConf.getOpenApiConfig()
+        # create a openapi.json file in the projectPath
+        openapi_file_path = os.path.join(self.projectPath, "openapi.json")
+        with open(openapi_file_path, "w", encoding='utf-8') as file:
+            file.write(json.dumps(openapiConfig, ensure_ascii=False, indent=2))
+        print(f"OpenAPI file created at: {openapi_file_path}")        
     
     def createMarkDownFileIndex(self):
         # create a markdown file with the name "data.md" in the projectPath
