@@ -206,11 +206,6 @@ class Transform:
         ## MeetingRoom
         if 'MeetingRoom' in product['associations']:
             newProduct['containsPlace'] = self.setcontainsPlace(product)
-            
-            # REMOVE
-            meetingRooms = self.setMeetingRoom(product)
-            if meetingRooms:
-                newProduct['meetingRoom'] = meetingRooms
                 
         ## Video
         if 'video' in product['associations']:
@@ -313,7 +308,7 @@ class Transform:
         for room in product['associations']['MeetingRoom']['products']:
             newRoom = {}
             newRoom['@type'] = 'MeetingRoom'
-            newRoom['name'] = room
+            newRoom['identifier'] = room
             meetingRoom.append(newRoom)
             
         return meetingRoom
@@ -323,6 +318,6 @@ class Transform:
         if 'associations' in product and 'video' in product['associations']:
             for video in product['associations']['video']['products']:
                 videoObject['@type'] = 'VideoObject'
-                videoObject['name'] = video
+                videoObject['identifier'] = video
         
         return videoObject
