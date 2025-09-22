@@ -303,7 +303,7 @@ class Transform:
     
     def setMeetingRoom(self, product):
         meetingRoom = []
-        for room in product['values']['associations']['MeetingRoom']['product_uuids']:
+        for room in product['values']['associations']['MeetingRoom']['products']:
             newRoom = {}
             newRoom['@type'] = 'MeetingRoom'
             newRoom['name'] = room
