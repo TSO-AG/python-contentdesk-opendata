@@ -296,7 +296,7 @@ class Transform:
     def setcontainsPlace(self, product):
         containsPlace = []
         # add MeetingRoom
-        if 'associations' in product['values'] and 'MeetingRoom' in product['values']['associations']:
+        if 'associations' in product and 'MeetingRoom' in product['associations']:
             meetingRooms = self.setMeetingRoom(product)
             containsPlace.extend(meetingRooms)
             
@@ -304,7 +304,7 @@ class Transform:
     
     def setMeetingRoom(self, product):
         meetingRoom = []
-        for room in product['values']['associations']['MeetingRoom']['products']:
+        for room in product['associations']['MeetingRoom']['products']:
             newRoom = {}
             newRoom['@type'] = 'MeetingRoom'
             newRoom['name'] = room
