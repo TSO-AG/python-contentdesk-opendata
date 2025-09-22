@@ -317,8 +317,8 @@ class Transform:
         return meetingRoom
     
     def setVideoObject(self, product):
-        videos = []
         if 'associations' in product and 'video' in product['associations']:
+            videos = []
             for video in product['associations']['video']['products']:
                 videoObject = self.getProductById(video)
                 newVideo = {}
