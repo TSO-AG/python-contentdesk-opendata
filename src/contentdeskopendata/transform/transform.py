@@ -211,6 +211,12 @@ class Transform:
             meetingRooms = self.setMeetingRoom(product)
             if meetingRooms:
                 newProduct['meetingRoom'] = meetingRooms
+                
+        ## Video
+        if 'video' in product['associations']:
+            videoObject = self.setVideoObject(product)
+            if videoObject:
+                newProduct['video'] = videoObject
 
         return newProduct
     
@@ -311,3 +317,12 @@ class Transform:
             meetingRoom.append(newRoom)
             
         return meetingRoom
+    
+    def setVideoObject(self, product):
+        videoObject = {}
+        if 'associations' in product and 'video' in product['associations']:
+            for video in product['associations']['video']['products']:
+                videoObject['@type'] = 'VideoObject'
+                videoObject['name'] = video
+        
+        return videoObject
