@@ -205,13 +205,13 @@ class Transform:
         # Associations
         ## MeetingRoom
         if 'MeetingRoom' in product['associations']:
-            newProduct['containsPlace'] = self.setcontainsPlace(product)
+            if len(product['associations']['MeetingRoom']['products']) > 0:
+                newProduct['containsPlace'] = self.setcontainsPlace(product)
                 
         ## Video
         if 'video' in product['associations']:
-            videoObject = self.setVideoObject(product)
-            if videoObject:
-                newProduct['video'] = videoObject
+            if len(product['associations']['video']['products']) > 0:
+                newProduct['video'] = self.setVideoObject(product)
 
         return newProduct
     
