@@ -306,18 +306,33 @@ class Transform:
     def setMeetingRoom(self, product):
         meetingRoom = []
         for room in product['associations']['MeetingRoom']['products']:
+            roomObject = self.getProductById(room)
             newRoom = {}
             newRoom['@type'] = 'MeetingRoom'
             newRoom['identifier'] = room
+            if 'name' in roomObject['values']:
+                newRoom['name'] = self.languageToJSONLD(roomObject['values']['name'])
             meetingRoom.append(newRoom)
             
         return meetingRoom
     
     def setVideoObject(self, product):
-        videoObject = {}
+        videos = []
         if 'associations' in product and 'video' in product['associations']:
             for video in product['associations']['video']['products']:
-                videoObject['@type'] = 'VideoObject'
-                videoObject['identifier'] = video
-        
-        return videoObject
+                videoObject = self.getProductById(video)
+                newVideo = {}
+                if videoObject:
+                    newVideo['@type'] = 'VideoObject'
+                    newVideo['identifier'] = video
+                    if 'name' in videoObject['values']:
+                        newVideo['name'] = self.languageToJSONLD(videoObject['values']['name'])
+                videos.append(newVideo)
+
+        return videos
+
+    def getProductById(self, identifier):
+        for product in self.extractProducts:
+            if product['identifier'] == identifier:
+                return product
+        return None
