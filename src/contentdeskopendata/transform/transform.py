@@ -201,15 +201,17 @@ class Transform:
         
         if additional_properties:
             newProduct['additionalProperty'] = additional_properties
-            
+        
+        # Associations
         if 'associations' in product['values']:
             containsPlace = self.setcontainsPlace(product)
             if containsPlace:
                 newProduct['containsPlace'] = containsPlace
-
-            meetingRooms = self.setMeetingRoom(product)
-            if meetingRooms:
-                newProduct['meetingRoom'] = meetingRooms
+            if 'MeetingRoom' in product['values']['associations']:
+                newProduct['meetingRoom'] = {}
+                meetingRooms = self.setMeetingRoom(product)
+                if meetingRooms:
+                    newProduct['meetingRoom'] = meetingRooms
 
         return newProduct
     
