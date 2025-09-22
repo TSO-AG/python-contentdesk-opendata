@@ -312,6 +312,27 @@ class Transform:
             newRoom['identifier'] = room
             if 'name' in roomObject['values']:
                 newRoom['name'] = self.languageToJSONLD(roomObject['values']['name'])
+            if 'disambiguatingDescription' in roomObject['values']:
+                newRoom['disambiguatingDescription'] = self.languageToJSONLD(roomObject['values']['disambiguatingDescription'])
+            if 'description' in roomObject['values']:
+                newRoom['description'] = self.languageToJSONLD(roomObject['values']['description'])
+                
+            if 'floorSize' in roomObject['values']:
+                newRoom['floorSize'] = {}
+                newRoom['floorSize']['@type'] = 'QuantitativeValue'
+                newRoom['floorSize']['value'] = roomObject['values']['floorSize'][0]['data']
+                if 'floorSize_unit' in roomObject['values']:
+                    newRoom['floorSize']['unitCode'] = roomObject['values']['floorSize_unit'][0]['data']
+            if 'maximumAttendeeCapacity' in roomObject['values']:
+                newRoom['maximumAttendeeCapacity'] = roomObject['values']['maximumAttendeeCapacity'][0]['data']
+            if 'amenityFeature' in roomObject['values']:
+                newRoom['amenityFeature'] = self.setAmenityFeature(roomObject)
+            if 'occupancy' in roomObject['values']:
+                newRoom['occupancy'] = {}
+                newRoom['occupancy']['@type'] = 'QuantitativeValue'
+                newRoom['occupancy']['value'] = roomObject['values']['occupancy'][0]['data']
+                if 'occupancy_unit' in roomObject['values']:
+                    newRoom['occupancy']['unitCode'] = roomObject['values']['occupancy_unit'][0]['data']
             meetingRoom.append(newRoom)
             
         return meetingRoom
@@ -327,6 +348,12 @@ class Transform:
                     newVideo['identifier'] = video
                     if 'name' in videoObject['values']:
                         newVideo['name'] = self.languageToJSONLD(videoObject['values']['name'])
+                    if 'contentUrl' in videoObject['values']:
+                        newVideo['contentUrl'] = videoObject['values']['contentUrl'][0]['data']
+                    if 'thumbnailUrl' in videoObject['values']:
+                        newVideo['thumbnailUrl'] = videoObject['values']['thumbnailUrl'][0]['data']
+                    if 'embedUrl' in videoObject['values']:
+                        newVideo['embedUrl'] = videoObject['values']['embedUrl'][0]['data']
                 videos.append(newVideo)
 
         return videos
