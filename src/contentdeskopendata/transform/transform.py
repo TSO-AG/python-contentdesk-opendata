@@ -202,6 +202,15 @@ class Transform:
         if additional_properties:
             newProduct['additionalProperty'] = additional_properties
             
+        if 'associations' in product['values']:
+            containsPlace = self.setcontainsPlace(product)
+            if containsPlace:
+                newProduct['containsPlace'] = containsPlace
+
+            meetingRooms = self.setMeetingRoom(product)
+            if meetingRooms:
+                newProduct['meetingRoom'] = meetingRooms
+
         return newProduct
     
     def languageToJSONLD(self, languageValue):
@@ -282,3 +291,22 @@ class Transform:
             award.append(newAward)
             
         return award
+    
+    def setcontainsPlace(self, product):
+        containsPlace = []
+        # add MeetingRoom
+        if 'associations' in product['values'] and 'MeetingRoom' in product['values']['associations']:
+            meetingRooms = self.setMeetingRoom(product)
+            containsPlace.extend(meetingRooms)
+            
+        return containsPlace
+    
+    def setMeetingRoom(self, product):
+        meetingRoom = []
+        for room in product['values']['associations']['MeetingRoom']['product_uuids']:
+            newRoom = {}
+            newRoom['@type'] = 'MeetingRoom'
+            newRoom['name'] = room
+            meetingRoom.append(newRoom)
+            
+        return meetingRoom
