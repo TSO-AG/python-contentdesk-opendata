@@ -4,6 +4,7 @@ from datetime import datetime
 from contentdeskopendata.load.geojson import GeoJsonTransformer
 from contentdeskopendata.load.map import mapCreator
 from contentdeskopendata.load.openApiConf import OpenApiConf
+from contentdeskopendata.load.changelog import ChangeLogMaker
 
 class Load:
     
@@ -22,7 +23,8 @@ class Load:
         self.loadProducts = self.setLoadProducts()
         self.createMarkDownFileIndex()
         self.createMarkDownFileDocumentation()
-        self.createMarkDownFileChangelog()
+        self.createMarkDownChangelogFiles()
+        self.createMarkDownFileChangelogMain()
         self.createOpenApiConf()
         self.copyFileCategory()
                
@@ -435,6 +437,22 @@ class Load:
             file.write("* Augmented and edited.\n")
             file.write("* Used commercially.\n")
         
+        print(f"Markdown file created at: {markdown_file_path}")
+
+    def createMarkDownChangelogFiles(self):
+        ChangeLogMaker().copyAllChangelogfromReproURL()
+        
+    def createMarkDownFileChangelogMain(self):
+        markdown_file_path = os.path.join(self.projectPath, "changelog.md")
+        with open(markdown_file_path, "w", encoding='utf-8') as file:
+            file.write("---\n")
+            file.write("hide:\n")
+            file.write("  - navigation\n")
+            #file.write("  - toc\n")
+            file.write("---\n\n")
+            file.write("# Change log\n\n")
+            file.write("[Version 2.1](CHANGELOG-2.1.md)\n\n")
+            file.write("[Version 2.0](CHANGELOG-2.0.md)\n\n")
         print(f"Markdown file created at: {markdown_file_path}")
 
     def createMarkDownFileChangelog(self):

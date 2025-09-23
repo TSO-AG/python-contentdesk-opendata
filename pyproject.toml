@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "contentdeskopendata"
-version = "0.0.157"
+version = "0.0.159"
 authors = [
   { name="Thomas Solenthaler" },
 ]

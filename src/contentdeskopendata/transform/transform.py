@@ -307,6 +307,8 @@ class Transform:
         meetingRoom = []
         for room in product['associations']['MeetingRoom']['products']:
             roomObject = self.getProductById(room)
+            if not roomObject:
+                continue
             newRoom = {}
             newRoom['@type'] = 'MeetingRoom'
             newRoom['identifier'] = room
