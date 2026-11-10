@@ -68,7 +68,7 @@ class mapHtml:
             // Popup
             const geojsonLayer = L.geoJSON(json, {
                 onEachFeature: function (feature, layer) {
-                    layer.bindPopup('<h1>'+feature.properties.name+'</h1><img src="'+feature.properties.image+'" width="100%" /><p><a href="'+feature.properties.url+'">Webseite</a>');
+                    layer.bindPopup('<h1>'+feature.properties.name+'</h1><img src="'+feature.properties.image+'" width="100%" />'+(feature.properties.url ? '<p><a href="'+feature.properties.url+'">Webseite</a>' : ''));
                     //layer.bindTooltip('<h1>'+feature.properties.name+'</h1><img src="'+feature.properties.image+'" width="100%" /><p><a href="'+feature.properties.url+'">Webseite</a>');
                     }
                 }).addTo(mymap);
